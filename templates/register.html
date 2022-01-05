@@ -1,0 +1,47 @@
+{% extends 'master.html' %}
+    {% block content %}
+    <section class="bookingform py-5">
+        <div class="container py-md-5 py-3">
+            <h1 class="heading text-capitalize text-center">Register your account</h1>
+            <h5 class="heading mb-5 text-center">Cammy Cab</h5>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Please Enter</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#" method="post">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">User Name</label>
+                                <input type="text" class="form-control" placeholder="User Name" name="Name" id="recipient-rname" required="">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-email" class="col-form-label">Email</label>
+                                <input type="email" class="form-control" placeholder="Email" name="Email" id="recipient-email" required="">
+                            </div>
+                            <div class="form-group">
+                                <label for="password1" class="col-form-label">Password</label>
+                                <input type="password" class="form-control" placeholder="Password" name="Password" id="password1" required="">
+                            </div>
+                            <div class="form-group">
+                                <label for="password2" class="col-form-label">Confirm Password</label>
+                                <input type="password" class="form-control" placeholder="Confirm Password" name="Confirm Password" id="password2" required="">
+                            </div>
+                            <div class="sub-w3l">
+                                <div class="sub-agile">
+                                    <input type="checkbox" id="brand2" value="">
+                                    <label for="brand2" class="mb-3">
+                                        <span></span>I Accept to the Terms & Conditions</label>
+                                </div>
+                            </div>
+                            <div class="right-w3l">
+                                <input type="submit" class="form-control" value="Register">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </section>
+
+    {% endblock %}
