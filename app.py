@@ -11,9 +11,12 @@ class users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
 
     def __repr__(self) -> str:
         return "{}{}".format(self.id,self.username)
+
+
 
 @app.route('/')
 def index():
@@ -38,3 +41,6 @@ def login():
 @app.route('/register')
 def register():
     return render_template("register.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)

@@ -383,7 +383,7 @@ h3.logo a.navbar-brand i {
 	-ms-flex: 1 1 auto;
 	flex: 1 1 auto;
 	padding: 2rem;
-	background: rgba(0, 0, 0, 0.46);
+	background: #252525;
 }
 .modal-body p {
     margin: 0;
