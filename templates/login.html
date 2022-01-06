@@ -1,17 +1,25 @@
 {% extends 'master.html' %}
     {% block content %}
 
-    <!--section class="bookingform py-5">
+    <section class="bookingform py-5">
         <div class="container py-md-5 py-3">
-            <h1 class="heading text-capitalize text-center">Sign In to your account</h1>
-            <h5 class="heading mb-5 text-center">Cammy Cab</h5>
-            <div class="row">
+            <h1 class="heading text-capitalize text-center">Booking form</h1>
+            <h5 class="heading mb-5 text-center">Taxi Cab</h5>
+            <div class="modal-dialog" role="document">
                 <div class="col-lg-6 book-appointment p-sm-5 py-5 px-4">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Sign In to your account</h5>
-                    </div>
-                    <div class="modal-body">
+                    <h2>Please Enter</h2>
+                    <div class="book-agileinfo-form">
                         <form action="#" method="post">
+                            <div class="row main-agile-sectns">
+                                <div class="col-md-6 agileits-btm-spc form-text1">
+                                    <label for="recipient-name" class="col-form-label">User Name</label>
+                                    <input type="text" class="form-control" placeholder="User Name" name="Name" id="recipient-name" required="">
+                                </div>
+                                <div class="col-md-6 agileits-btm-spc form-text2">
+                                    <label for="password" class="col-form-label">Password</label>
+                                    <input type="password" class="form-control" placeholder="Password" name="Password" id="password" required="">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">User Name</label>
                                 <input type="text" class="form-control" placeholder="User Name" name="Name" id="recipient-name" required="">
@@ -46,7 +54,7 @@
                 </div>
             </div>
         </div>
-    </section-->
+    </section>	
 
     <section class="bookingform py-5">
         <div class="container py-md-5 py-3">
@@ -88,7 +96,6 @@
                     </div>
                 </div>
             </div>
-        
         </div>
     </section>
 

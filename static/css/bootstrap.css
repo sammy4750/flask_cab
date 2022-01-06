@@ -5545,6 +5545,24 @@ button.close {
   overflow: scroll;
 }
 
+.form-center {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+}
+
 @media (min-width: 576px) {
   .modal-dialog {
     max-width: 500px;
@@ -8742,6 +8760,7 @@ button.bg-dark:focus {
 .text-center {
   text-align: center !important;
 }
+
 
 @media (min-width: 576px) {
   .text-sm-left {

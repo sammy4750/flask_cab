@@ -330,7 +330,7 @@ h3.logo a.navbar-brand i {
 	flex-direction: column;
 	width: 100%;
 	pointer-events: auto;
-	background: url(../images/banner3.jpg) no-repeat center #fff;
+	background: url(../images/banner3.jpg) no-repeat center #fff; 
 	background-size: cover;
 	border: 6px solid #fff;
 	border-radius: 0rem;
