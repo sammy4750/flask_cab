@@ -50,8 +50,8 @@ def register():
         password = request.form['password']
         cpassword = request.form['cpassword']
 
-        registeration = users(fname=fname,lname=lname,email=email,contact=contact,password=password,cpassword=cpassword)
-        db.session.add(registeration)
+        registration = users(fname=fname,lname=lname,email=email,contact=contact,password=password,cpassword=cpassword)
+        db.session.add(registration)
         db.session.commit()
 
     return render_template("register.html")
