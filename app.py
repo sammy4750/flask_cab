@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -9,13 +9,15 @@ db = SQLAlchemy(app)
 
 class users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), nullable=False)
-    password = db.Column(db.String(100), nullable=False)
+    fname = db.Column(db.String(50), nullable=False)
+    lname = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), nullable=False)
+    contact = db.Column(db.Integer, nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+    cpassword = db.Column(db.String(100), nullable=False)
 
     def __repr__(self) -> str:
-        return "{}{}".format(self.id,self.username)
-
+        return "{}{}".format(self.id,self.email)
 
 
 @app.route('/')
@@ -38,9 +40,21 @@ def about():
 def login():
     return render_template("login.html")
 
-@app.route('/register')
+@app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'POST':
+        fname = request.form['fname']
+        lname = request.form['lname']
+        email = request.form['email']
+        contact = request.form['contact']
+        password = request.form['password']
+        cpassword = request.form['cpassword']
+
+        registeration = users(fname=fname,lname=lname,email=email,contact=contact,password=password,cpassword=cpassword)
+        db.session.add(registeration)
+        db.session.commit()
+
     return render_template("register.html")
 
-if __name__ == "__main__":
+if __name__=="__main__":
     app.run(debug=True)
