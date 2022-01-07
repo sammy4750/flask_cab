@@ -10,6 +10,13 @@
                         <h5>Please Enter</h5>
                     </div>
                     <div class="modal-body">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="notification is-danger text-light">
+                                    {{ messages[0] }}. Go to <a href="/login">Login</a> or check your email-id. <br><br>
+                                </div>
+                            {% endif %}
+                        {% endwith %}
                         <form method="POST">
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">First Name</label>
@@ -37,7 +44,7 @@
                             </div>
                             <div class="sub-w3l">
                                 <div class="sub-agile">
-                                    <input type="checkbox" id="brand2" value="">
+                                    <input required type="checkbox" id="brand2" value="">
                                     <label for="brand2" class="mb-3" style="color: blanchedalmond;">
                                         <span></span>I Accept to the Terms & Conditions</label>
                                 </div>

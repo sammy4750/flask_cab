@@ -1,12 +1,17 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+# from flask_login import LoginManager
+# from flask_login import UserMixin
 
 app = Flask(__name__)
+app.secret_key = "super secret key"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///users.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+# login_manager = LoginManager()
 
 class users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -45,10 +50,15 @@ def login():
 
         data = users.query.filter_by(email=email).first()
 
-        if data is not None:
-            user_pass = data[5]
-            if password == user_pass:
-                return redirect("/")   
+        # if data is not None:              #code by sammy for login
+        #     user_pass = data[5]
+        #     if password == user_pass:
+        #         return redirect("/")   
+
+        if not data or not check_password_hash(data.password, password):
+            flash('Please check your login credentials.')
+            return redirect('/login')
+        return redirect("/")
 
     return render_template("login.html")
 
@@ -64,7 +74,8 @@ def register():
 
         data = users.query.filter_by(email=email).first()
         if data:
-            return redirect("/login")
+            flash('User already exist')
+            return redirect("/register")
 
         registration = users(fname=fname,lname=lname,email=email,contact=contact,password=generate_password_hash(password,method='sha256'),cpassword=generate_password_hash(cpassword,method='sha256'))
         db.session.add(registration)

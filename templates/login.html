@@ -58,6 +58,13 @@
                         <h5 class="">Please Enter Your Credentials</h5>
                     </div>
                     <div class="modal-body">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="notification is-danger text-light">
+                                    {{ messages[0] }}. and try again. <br><br>
+                                </div>
+                            {% endif %}
+                        {% endwith %}
                         <form action="/login" method="POST">
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Email-Id</label>
