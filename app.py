@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
@@ -11,7 +12,7 @@ class users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(50), nullable=False)
     lname = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False, unique=True)
     contact = db.Column(db.Integer, nullable=False)
     password = db.Column(db.String(100), nullable=False)
     cpassword = db.Column(db.String(100), nullable=False)
@@ -36,8 +37,19 @@ def contact():
 def about():
     return render_template("about.html")
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        data = users.query.filter_by(email=email).first()
+
+        if data is not None:
+            user_pass = data[5]
+            if password == user_pass:
+                return redirect("/")   
+
     return render_template("login.html")
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -50,9 +62,15 @@ def register():
         password = request.form['password']
         cpassword = request.form['cpassword']
 
-        registration = users(fname=fname,lname=lname,email=email,contact=contact,password=password,cpassword=cpassword)
+        data = users.query.filter_by(email=email).first()
+        if data:
+            return redirect("/login")
+
+        registration = users(fname=fname,lname=lname,email=email,contact=contact,password=generate_password_hash(password,method='sha256'),cpassword=generate_password_hash(cpassword,method='sha256'))
         db.session.add(registration)
         db.session.commit()
+
+        return redirect("/login")
 
     return render_template("register.html")
 
