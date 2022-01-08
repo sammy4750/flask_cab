@@ -54,14 +54,28 @@
 			
 			
 			<div class="col-md-4 top-forms mt-md-3 mt-2 mb-md-0 mb-3">
-				<span class="mx-lg-4 mx-md-2  mx-1">
-					<a href="/login">
-						<i class="fas fa-lock"></i> Sign In</a>
-				</span>
-				<span>
-					<a href="/register">
-						<i class="fas fa-user"></i> Register</a>
-				</span>
+				{% if not data %}
+					<span class="mx-lg-4 mx-md-2  mx-1">
+						<a href="/login">
+							<i class="fas fa-lock"></i> Sign In</a>
+					</span>
+					<span class="mx-lg-4 mx-md-2  mx-1">
+						<a href="/register">
+							<i class="fas fa-user"></i> Register</a>
+					</span>
+				{% endif %}
+				{% if data %}
+					<span class="mx-lg-4 mx-md-2 mx-1 nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false">
+							Welcome {{data.fname}}
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item text-center" href="/editprofile">Edit Profile</a>
+							<a class="dropdown-item text-center" href="/logout">Logout</a>
+						</div>
+					</span>
+				{% endif %}
 			</div>
 		</div>
 	</div>
