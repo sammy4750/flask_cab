@@ -41,7 +41,7 @@ class users(db.Model, UserMixin):
 
 
 @app.route('/')
-def index():
+def index(): #aji aa incomplete che
     if request.cookies:
         c = request.cookies
         print(c)
