@@ -56,7 +56,7 @@ def login():
         #         return redirect("/")   
 
         if not data or not check_password_hash(data.password, password):
-            flash('Please check your login credentials.')
+            flash('Please check your login credentials')
             return redirect('/login')
         return redirect("/")
 
