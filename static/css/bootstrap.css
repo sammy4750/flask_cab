@@ -3131,7 +3131,8 @@ tbody.collapse.show {
 
 .dropup,
 .dropdown {
-  position: relative;
+  position: absolute; /* Modified */
+  z-index: 1000;
 }
 
 .dropdown-toggle::after {
@@ -3152,9 +3153,9 @@ tbody.collapse.show {
 }
 
 .dropdown-menu {
-  position: absolute;
+  position: relative;
   top: 100%;
-  left: 0;
+  left:0;
   z-index: 1000;
   display: none;
   float: left;
@@ -3163,7 +3164,7 @@ tbody.collapse.show {
   margin: 0.125rem 0 0;
   font-size: 1rem;
   color: #212529;
-  text-align: left;
+  text-align: center;
   list-style: none;
   background-color: #fff;
   background-clip: padding-box;

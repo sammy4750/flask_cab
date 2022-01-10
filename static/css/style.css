@@ -120,11 +120,10 @@ a.sign {
 .top-forms span{
     font-size: 0.9em;
     color: #707173;
-	letter-spacing: 1px;
 }
 .top-forms span a {
     color: #555;
-    border: 1px dotted;
+    border: 1px hidden;
     padding: 10px 20px;
 	border-radius: 3px;
     font-weight: 500;
@@ -2196,3 +2195,9 @@ ul.radio-w3ls li {
 	}
 }
 /*-- //Responsive Design --*/
+/* .expand-left{
+	unicode-bidi: embed;
+	direction: rtl;
+	width: 300px;
+	text-align: center;
+} */

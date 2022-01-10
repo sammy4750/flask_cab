@@ -41,34 +41,22 @@ class users(db.Model, UserMixin):
 
 @app.route('/')
 def index():
-    if current_user.is_authenticated:
-        return render_template("index.html",data=current_user)
-    else:
-        return render_template("index.html")
+    return render_template("index.html")
 
 @app.route('/booking')
 @login_required
 def booking():
-    if current_user.is_authenticated:
-        return render_template("booking.html",data=current_user)
-    else:
-        return render_template("booking.html")
+    return render_template("booking.html")
     # return render_template("booking.html")
 
 @app.route('/contact')
 def contact():
-    if current_user.is_authenticated:
-        return render_template("contact.html",data=current_user)
-    else:
-        return render_template("contact.html")
+     return render_template("contact.html")
     # return render_template("contact.html")
 
 @app.route('/about')
 def about():
-    if current_user.is_authenticated:
-        return render_template("about.html",data=current_user)
-    else:
-        return render_template("about.html")
+    return render_template("about.html")
     # return render_template("about.html")
 
 # Register, Login and Logout
