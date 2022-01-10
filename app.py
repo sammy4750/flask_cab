@@ -21,8 +21,7 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 @login_manager.user_loader
-def load_user(user_id):
-
+def load_user(user_id):         
     return users.query.get(int(user_id))
 
 #  Database Models
@@ -41,26 +40,36 @@ class users(db.Model, UserMixin):
 
 
 @app.route('/')
-def index(): #aji aa incomplete che
-    if request.cookies:
-        c = request.cookies
-        print(c)
+def index():
+    if current_user.is_authenticated:
+        return render_template("index.html",data=current_user)
     else:
-        print("Bye Bye")
-    return render_template("index.html")
+        return render_template("index.html")
 
 @app.route('/booking')
 @login_required
 def booking():
-    return render_template("booking.html")
+    if current_user.is_authenticated:
+        return render_template("booking.html",data=current_user)
+    else:
+        return render_template("booking.html")
+    # return render_template("booking.html")
 
 @app.route('/contact')
 def contact():
-    return render_template("contact.html")
+    if current_user.is_authenticated:
+        return render_template("contact.html",data=current_user)
+    else:
+        return render_template("contact.html")
+    # return render_template("contact.html")
 
 @app.route('/about')
 def about():
-    return render_template("about.html")
+    if current_user.is_authenticated:
+        return render_template("about.html",data=current_user)
+    else:
+        return render_template("about.html")
+    # return render_template("about.html")
 
 # Register, Login and Logout
 
@@ -99,7 +108,7 @@ def login():
             flash('Please check your login credentials')
             return redirect('/login')
         login_user(data)
-        return render_template("index.html", data=data)
+        return redirect("/")
 
     return render_template("login.html")
 
