@@ -19,7 +19,7 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 @login_manager.user_loader
-def load_user(user_id):         
+def load_user(user_id):
     return users.query.get(int(user_id))
 
 #  Database Models
@@ -38,20 +38,20 @@ class users(db.Model, UserMixin):
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("/user/index.html")
 
 @app.route('/booking')
 @login_required
 def booking():
-    return render_template("booking.html")
+    return render_template("/user/booking.html")
 
 @app.route('/contact')
 def contact():
-     return render_template("contact.html")
+     return render_template("/user/contact.html")
 
 @app.route('/about')
 def about():
-    return render_template("about.html")
+    return render_template("/user/about.html")
 
 # Register, Login and Logout
 
@@ -80,7 +80,7 @@ def register():
             flash('Confirm Password is not same as the Password')
             return redirect("/register")
 
-    return render_template("register.html")
+    return render_template("/user/register.html")
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -101,7 +101,7 @@ def login():
         login_user(data, remember=True)
         return redirect("/")
 
-    return render_template("login.html")
+    return render_template("/user/login.html")
 
 @app.route('/logout',methods=['GET', 'POST'])
 @login_required
@@ -114,7 +114,7 @@ def logout():
 @app.route('/editprofile')
 @login_required
 def editprofile():
-    return render_template("editprofile.html")
+    return render_template("/user/editprofile.html")
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -137,7 +137,7 @@ def update(id):
 @app.route('/editpass')
 @login_required
 def editpass():
-    return render_template("editpass.html")
+    return render_template("/user/editpass.html")
 
 @app.route('/updatepass/<int:id>', methods=['GET', 'POST'])
 @login_required
