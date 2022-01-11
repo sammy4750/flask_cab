@@ -14,17 +14,19 @@
                         {% with messages = get_flashed_messages() %}
                             {% if messages %}
                                 <div class="notification is-danger text-light">
-                                    {{ messages[0] }}. Go to <a href="/login">Login</a> or check your email-id. <br><br>
+                                    {{ messages[0] }}. 
+                                    <!-- Go to <a href="/login">Login</a> or check your email-id.  -->
+                                    <br><br>
                                 </div>
                             {% endif %}
                         {% endwith %}
                         <form method="POST">
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">First Name</label>
+                                <label for="recipient-fname" class="col-form-label">First Name</label>
                                 <input type="text" class="form-control" placeholder="First Name" name="fname" id="recipient-fname" required="">
                             </div>
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Last Name</label>
+                                <label for="recipient-lname" class="col-form-label">Last Name</label>
                                 <input type="text" class="form-control" placeholder="Last Name" name="lname" id="recipient-lname" required="">
                             </div>
                             <div class="form-group">
@@ -32,8 +34,8 @@
                                 <input type="email" class="form-control" placeholder="Email" name="email" id="recipient-email" required="">
                             </div>
                             <div class="form-group">
-                                <label for="recipient-email" class="col-form-label">Contact</label>
-                                <input type="number" class="form-control" placeholder="Contact" name="contact" id="recipient-contact" required="">
+                                <label for="recipient-contact" class="col-form-label">Contact</label>
+                                <input type="tel" class="form-control" pattern="[0-9]{10}" placeholder="Contact" name="contact" id="recipient-contact" required oninvalid="this.setCustomValidity('Enter 10 digit number')" oninput="this.setCustomValidity('')">
                             </div>
                             <div class="form-group">
                                 <label for="password1" class="col-form-label">Password</label>
@@ -49,7 +51,7 @@
                                     <label for="brand2" class="mb-3" style="color: blanchedalmond;">
                                         <span></span>I Accept to the Terms & Conditions</label>
                                 </div>
-                            </div>
+                            </div> <br>
                             <div class="right-w3l">
                                 <input type="submit" class="form-control" value="Register">
                             </div>

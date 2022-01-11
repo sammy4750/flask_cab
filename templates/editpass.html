@@ -1,0 +1,44 @@
+{% extends 'master.html' %}
+    {% block content %}
+    
+    <section class="bookingform py-5">
+        <div class="container py-md-5 py-3">
+            <h1 class="heading text-capitalize text-center">Change Password</h1>
+            <h5 class="heading mb-5 text-center">Cammy Cab</h5>
+            <div class="row justify-content-center" role="document">
+                <div class="col-lg-6">
+                    <div class="modal-header">
+                        <h5>Please Enter</h5>
+                    </div>
+                    <div class="modal-body">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="notification is-danger text-light">
+                                    {{ messages[0] }}. <br><br>
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                        <form action="/updatepass/{{current_user.id}}" method="POST">
+                            <div class="form-group">
+                                <label for="password1" class="col-form-label">Old Password</label>
+                                <input type="password" class="form-control" placeholder="Old Password" name="opassword" id="password1" required="">
+                            </div>
+                            <div class="form-group">
+                                <label for="password1" class="col-form-label">New Password</label>
+                                <input type="password" class="form-control" placeholder="New Password" name="npassword" id="password2" required="">
+                            </div>
+                            <div class="form-group">
+                                <label for="password2" class="col-form-label">Confirm New Password</label>
+                                <input type="password" class="form-control" placeholder="Confirm New Password" name="cnpassword" id="password3" required="">
+                            </div> <br>
+                            <div class="right-w3l">
+                                <input type="submit" class="form-control" value="Change Password">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </section>
+
+    {% endblock %}

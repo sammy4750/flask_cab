@@ -7,8 +7,6 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, log
 app = Flask(__name__)
 app.secret_key = "super secret key"
 
-
-
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///users.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -31,9 +29,8 @@ class users(db.Model, UserMixin):
     fname = db.Column(db.String(50), nullable=False)
     lname = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
-    contact = db.Column(db.Integer, nullable=False)
+    contact = db.Column(db.Integer, nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
-    cpassword = db.Column(db.String(100), nullable=False)
 
     def __repr__(self) -> str:
         return "{}{}".format(self.id,self.email)
@@ -47,17 +44,14 @@ def index():
 @login_required
 def booking():
     return render_template("booking.html")
-    # return render_template("booking.html")
 
 @app.route('/contact')
 def contact():
      return render_template("contact.html")
-    # return render_template("contact.html")
 
 @app.route('/about')
 def about():
     return render_template("about.html")
-    # return render_template("about.html")
 
 # Register, Login and Logout
 
@@ -76,11 +70,15 @@ def register():
             flash('User already exist')
             return redirect("/register")
 
-        registration = users(fname=fname,lname=lname,email=email,contact=contact,password=generate_password_hash(password,method='sha256'),cpassword=generate_password_hash(cpassword,method='sha256'))
-        db.session.add(registration)
-        db.session.commit()
-
-        return redirect("/login")
+        if password==cpassword:
+            registration = users(fname=fname,lname=lname,email=email,contact=contact,password=generate_password_hash(password,method='sha256'))
+            db.session.add(registration)
+            db.session.commit()
+            login_user(registration, remember=True)
+            return redirect("/")
+        else:
+            flash('Confirm Password is not same as the Password')
+            return redirect("/register")
 
     return render_template("register.html")
 
@@ -89,13 +87,18 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        # remem = request.form['remember']
 
         data = users.query.filter_by(email=email).first()
 
         if not data or not check_password_hash(data.password, password):
             flash('Please check your login credentials')
             return redirect('/login')
-        login_user(data)
+        # if remem:
+        #     login_user(data, remember=True)
+        # else:
+        #     login_user(data, remember=False)
+        login_user(data, remember=True)
         return redirect("/")
 
     return render_template("login.html")
@@ -105,6 +108,62 @@ def login():
 def logout():
     logout_user()
     return redirect("/login")
+
+#Edit Profile and Password
+
+@app.route('/editprofile')
+@login_required
+def editprofile():
+    return render_template("editprofile.html")
+
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+@login_required
+def update(id):
+    if request.method == 'POST':
+        fname = request.form['fname']
+        lname = request.form['lname']
+        contact = request.form['contact']
+
+        data = users.query.filter_by(id=id).first()
+        data.fname = fname
+        data.lname = lname
+        data.contact = contact
+        db.session.add(data)
+        db.session.commit()
+
+        return redirect("/")
+    return redirect('/editprofile')
+
+@app.route('/editpass')
+@login_required
+def editpass():
+    return render_template("editpass.html")
+
+@app.route('/updatepass/<int:id>', methods=['GET', 'POST'])
+@login_required
+def updatepass(id):
+    if request.method == 'POST':
+        opassword = request.form['opassword']
+        npassword = request.form['npassword']
+        cnpassword = request.form['cnpassword']
+
+        data = users.query.filter_by(id=id).first()
+
+        if check_password_hash(data.password,opassword):
+            if npassword==cnpassword:
+                data.password = generate_password_hash(npassword)
+                data.cpassword = generate_password_hash(cnpassword)
+                db.session.add(data)
+                db.session.commit()
+                return redirect("/")
+            else:
+                flash('Confirm Password is not same as the Password')
+                return redirect("/editpass")
+        else:
+            flash('Old password does not match')
+            return redirect('/editpass')
+    return redirect('/editpass')
+        
 
 # Run Code
 
