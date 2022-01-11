@@ -152,7 +152,6 @@ def updatepass(id):
         if check_password_hash(data.password,opassword):
             if npassword==cnpassword:
                 data.password = generate_password_hash(npassword)
-                data.cpassword = generate_password_hash(cnpassword)
                 db.session.add(data)
                 db.session.commit()
                 return redirect("/")
