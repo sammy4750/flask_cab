@@ -1,4 +1,4 @@
-{% extends 'user/master.html' %}
+{% extends 'driver/master.html' %}
     {% block content %}
     
     <section class="bookingform py-5">
@@ -20,7 +20,7 @@
                                 </div>
                             {% endif %}
                         {% endwith %}
-                        <form action="/user/register" method="POST">
+                        <form action="/driver/register" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="recipient-fname" class="col-form-label">First Name</label>
                                 <input type="text" class="form-control" placeholder="First Name" name="fname" id="recipient-fname" required="">
@@ -36,6 +36,10 @@
                             <div class="form-group">
                                 <label for="recipient-contact" class="col-form-label">Contact</label>
                                 <input type="tel" class="form-control" pattern="[0-9]{10}" placeholder="Contact" name="contact" id="recipient-contact" required oninvalid="this.setCustomValidity('Enter 10 digit number')" oninput="this.setCustomValidity('')">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputFile" class="col-form-label">File (.pdf)</label>
+                                <input type="file" class="form-control" placeholder="Choose File" name="inputFile" id="recipient-file" required="">
                             </div>
                             <div class="form-group">
                                 <label for="password1" class="col-form-label">Password</label>

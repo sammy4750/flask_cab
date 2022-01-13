@@ -1,4 +1,4 @@
-{% extends 'master.html' %}
+{% extends 'user/master.html' %}
     {% block content %}
 
     <section class="bookingform py-5">
@@ -18,7 +18,7 @@
                                 </div>
                             {% endif %}
                         {% endwith %}
-                        <form action="/login" method="POST">
+                        <form action="/user/login" method="POST">
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Email-Id</label>
                                 <input type="text" class="form-control" placeholder="Email-Id" name="email" id="recipient-name" required="">
@@ -44,7 +44,7 @@
                                 <input type="submit" class="form-control" value="Sign In">
                             </div>
                             <p class="text-center dont-do text-white mt-3">Don't have an account?
-                                <a href="/register" style="color: white;">
+                                <a href="/user/register" style="color: white;">
                                     Register Now</a>
                             </p>
                         </form>

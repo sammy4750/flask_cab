@@ -1,4 +1,4 @@
-{% extends 'master.html' %}
+{% extends 'user/master.html' %}
     {% block content %}
     
     <section class="bookingform py-5">
@@ -18,7 +18,7 @@
                                 </div>
                             {% endif %}
                         {% endwith %}
-                        <form action="/updatepass/{{current_user.id}}" method="POST">
+                        <form action="/user/updatepass/{{current_user.id}}" method="POST">
                             <div class="form-group">
                                 <label for="password1" class="col-form-label">Old Password</label>
                                 <input type="password" class="form-control" placeholder="Old Password" name="opassword" id="password1" required="">

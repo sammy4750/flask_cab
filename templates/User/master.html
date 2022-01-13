@@ -53,32 +53,94 @@
 			</div>
 			
 				{% if current_user.is_authenticated %}
-				<div class="col-lg-4 col-md-4 top-forms mt-md-3 text-center">
-					<span class="nav-item dropdown">
-						<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false"> <!-- dropdown-toggle -->
-							<i class="fa fa-lg fa-user"></i>  &nbsp
-							<b>Welcome, {{current_user.fname}}</b>&nbsp &nbsp
-							<i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
-						</a>
-						<span class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item text-left" href="/editprofile">
-								<i class="fa fa-cog"></i> &nbsp 
-								<b> Edit Profile</a></b>
-							<a class="dropdown-item text-left" href="/logout">
-								<i class="fa fa-sign-out-alt"></i> &nbsp &nbsp
-								<b> Logout</a></b>
-						</span>
-					</span>
+					{% if current_user.fname|length > 12 %}
+					<div class="row col-lg-4 col-md-3 top-forms mt-md-2">
+						<div class="col-lg-2 col-md-4">
+
+						</div>
+						<div class="col-lg-10 col-md-4 text-left">
+							<span class="nav-item dropdown">
+								<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">
+									<i class="fa fa-lg fa-user"></i>  &nbsp
+									<b>Welcome, {{current_user.fname}}</b>&nbsp &nbsp
+									<i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
+								</a>
+								<span class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item text-left" href="/user/editprofile">
+										<i class="fa fa-cog"></i> &nbsp 
+										<b> Edit Profile</a></b>
+									<a class="dropdown-item text-left" href="/user/logout">
+										<i class="fa fa-sign-out-alt"></i> &nbsp
+										<b> Logout</a></b>
+								</span>
+							</span>
+						</div>
+					</div>
+					{% else %}
+					<div class="row col-lg-4 col-md-3 top-forms mt-md-2">
+						<div class="col-lg-4 col-md-4">
+
+						</div>
+						<div class="col-lg-8 col-md-4 text-left">
+							<span class="nav-item dropdown">
+								<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">
+									<i class="fa fa-lg fa-user"></i>  &nbsp
+									<b>Welcome, {{current_user.fname}}</b>&nbsp &nbsp
+									<i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
+								</a>
+								<span class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item text-left" href="/user/editprofile">
+										<i class="fa fa-cog"></i> &nbsp 
+										<b> Edit Profile</a></b>
+									<a class="dropdown-item text-left" href="/user/logout">
+										<i class="fa fa-sign-out-alt"></i> &nbsp
+										<b> Logout</a></b>
+								</span>
+							</span>
+						</div>
+					</div>
+					{% endif %}
 				{% else %}
-				<div class="col-lg-4 col-md-4 top-forms mt-md-3">
-					<span class="mx-lg-4 mx-md-2  mx-1">
-						<a href="/login">
-							<i class="fas fa-lock"></i> Sign In</a>
-					</span><span class="mx-lg-4 mx-md-2  mx-1">
-						<a href="/register">
-							<i class="fas fa-user"></i> Register</a>
-					</span>
+				<div class="row col-lg-4 col-md-4 mt-md-2 top-forms ">
+					<div class="col-lg-6 col-md-4">
+						<span class="nav-item dropdown">
+							<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> 
+								<i class="fa fa-lg fa-lock"></i>  &nbsp
+								<b>Sign In</b>&nbsp &nbsp
+								<i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
+							</a>
+							<span class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item text-left" href="/user/login">
+									<i class="fa fa-lock"></i> &nbsp 
+									<b> Sign In To Ride</a></b>
+								<a class="dropdown-item text-left" href="/driver/login">
+									<i class="fa fa-lock"></i> &nbsp
+									<b> Sign In To Drive</a></b>
+							</span>
+						</span>
+					</div>
+					<div class="col-lg-6 col-md-4">
+						<span class="nav-item dropdown">
+							<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> 
+								<i class="fa fa-lg fa-user"></i>  &nbsp
+								<b>Register</b>&nbsp &nbsp
+								<i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
+							</a>
+							<span class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item text-left" href="/user/register">
+									<i class="fa fa-user"></i> &nbsp 
+									<b> Register To Ride</a></b>
+								<a class="dropdown-item text-left" href="/driver/home">
+									<i class="fa fa-user"></i> &nbsp
+									<b> Register To Drive</a></b>
+							</span>
+						</span>
+					</div>
+				</div>
 				{% endif %}
 			</div>
 		</div>
@@ -101,13 +163,13 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/booking">Booking</a>
+							<a class="nav-link" href="/user/booking">Booking</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/contact">Contact</a>
+							<a class="nav-link" href="/user/contact">Contact</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/about">About Us</a>
+							<a class="nav-link" href="/user/about">About Us</a>
 						</li>
 					</ul>
 				</div>
@@ -132,7 +194,7 @@
 			<div class="col-lg-3 col-sm-6 mb-lg-0 mb-5 footer-grid-agileits-w3ls1 text-left">
 				<h3 class="mb-sm-5 mb-4 mt-sm-0 mt-4">About Company</h3>	
 				<p>The Cammy Cab offers the safest and easiest way to ride, with multiple travel options and well-protected rides. With more than 3,00,000 vehicles in 100+ cities including Bangalore, Chennai, Delhi, Mumbai, Hyderabad, Kolkata, and Pune, Cammy is the most popular ride hailing service in India.</p>
-				<a href="/about" class="read">Know More <i class="fas fa-caret-right"></i></a>
+				<a href="/user/about" class="read">Know More <i class="fas fa-caret-right"></i></a>
 			</div>
 			<div class="col-lg-3 col-sm-6 mb-lg-0 mb-5 footer-grid-agileits-w3ls1 text-left">
 				<h3 class="mb-sm-5 mb-4">Locate Us</h3>	
