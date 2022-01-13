@@ -21,9 +21,13 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return users.query.get(int(user_id))
 @login_manager.user_loader
-def load_user(user_id):
-    return users.query.get(int(user_id))
+def load_user(driver_id):
+    return drivers.query.get(int(driver_id))
 
 #  Database Models
 
@@ -220,6 +224,82 @@ def driver_register():
             flash('Confirm Password is not same as the Password')
             return redirect("/driver/register")
     return render_template('/driver/register.html')
+
+@app.route('/driver/login', methods=['GET', 'POST'])
+def driver_login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        data = drivers.query.filter_by(email=email).first()
+
+        if not data or not check_password_hash(data.password, password):
+            flash('Please check your login credentials')
+            return redirect('/driver/login')
+        login_user(data, remember=True)
+        return redirect("/driver/home")
+
+    return render_template("/driver/login.html")
+
+@app.route('/driver/logout',methods=['GET', 'POST'])
+@login_required
+def driver_logout():
+    logout_user()
+    return redirect("/driver/login")
+
+# Edit Profile and Password
+
+@app.route('/driver/editprofile')
+@login_required
+def driver_editprofile():
+    return render_template("/driver/editprofile.html")
+
+@app.route('/driver/update/<int:id>', methods=['GET', 'POST'])
+@login_required
+def driver_update(id):
+    if request.method == 'POST':
+        fname = request.form['fname']
+        lname = request.form['lname']
+        contact = request.form['contact']
+
+        data = drivers.query.filter_by(id=id).first()
+        data.first_name = fname
+        data.last_name = lname
+        data.contact = contact
+        db.session.add(data)
+        db.session.commit()
+
+        return redirect("/driver/home")
+    return redirect('/drriver/editprofile')
+
+@app.route('/driver/editpass')
+@login_required
+def driver_editpass():
+    return render_template("/driver/editpass.html")
+
+@app.route('/driver/updatepass/<int:id>', methods=['GET', 'POST'])
+@login_required
+def driver_updatepass(id):
+    if request.method == 'POST':
+        opassword = request.form['opassword']
+        npassword = request.form['npassword']
+        cnpassword = request.form['cnpassword']
+
+        data = drivers.query.filter_by(id=id).first()
+
+        if check_password_hash(data.password,opassword):
+            if npassword==cnpassword:
+                data.password = generate_password_hash(npassword)
+                db.session.add(data)
+                db.session.commit()
+                return redirect("/driver/home")
+            else:
+                flash('Confirm Password is not same as the Password')
+                return redirect("/driver/editpass")
+        else:
+            flash('Old password does not match')
+            return redirect('/driver/editpass')
+    return redirect('/driver/editpass')
 
 
 

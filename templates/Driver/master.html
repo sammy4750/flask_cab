@@ -53,24 +53,53 @@
 			</div>
 			
             {% if current_user.is_authenticated %}
-            <div class="col-lg-4 col-md-3 top-forms mt-md-2 text-center">
-                <span class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="fa fa-lg fa-user"></i>  &nbsp
-                        <b>Welcome, {{current_user.first_name}}</b>&nbsp &nbsp
-                        <i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
-                    </a>
-                    <span class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item text-left" href="/user/editprofile">
-                            <i class="fa fa-cog"></i> &nbsp 
-                            <b> Edit Profile</a></b>
-                        <a class="dropdown-item text-left" href="/user/logout">
-                            <i class="fa fa-sign-out-alt"></i> &nbsp
-                            <b> Logout</a></b>
-                    </span>
-                </span>
-            </div>
+				{% if current_user.first_name|length > 12 %}
+				<div class="row col-lg-4 col-md-3 top-forms mt-md-2">
+					<div class="col-lg-2 col-md-4">
+						</div>
+					<div class="col-lg-10 col-md-4 text-left">
+						<span class="nav-item dropdown">
+							<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">
+								<i class="fa fa-lg fa-user"></i>  &nbsp
+								<b>Welcome, {{current_user.first_name}}</b>&nbsp &nbsp
+								<i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
+							</a>
+							<span class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item text-left" href="/driver/editprofile">
+									<i class="fa fa-cog"></i> &nbsp 
+									<b> Edit Profile</a></b>
+								<a class="dropdown-item text-left" href="/driver/logout">
+									<i class="fa fa-sign-out-alt"></i> &nbsp
+									<b> Logout</a></b>
+							</span>
+						</span>
+					</div>
+				</div>
+				{% else %}
+				<div class="row col-lg-4 col-md-3 top-forms mt-md-2">
+					<div class="col-lg-4 col-md-4">
+						</div>
+					<div class="col-lg-8 col-md-4 text-left">
+						<span class="nav-item dropdown">
+							<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">
+								<i class="fa fa-lg fa-user"></i>  &nbsp
+								<b>Welcome, {{current_user.first_name}}</b>&nbsp &nbsp
+								<i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
+							</a>
+							<span class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item text-left" href="/driver/editprofile">
+									<i class="fa fa-cog"></i> &nbsp 
+									<b> Edit Profile</a></b>
+								<a class="dropdown-item text-left" href="/driver/logout">
+									<i class="fa fa-sign-out-alt"></i> &nbsp
+									<b> Logout</a></b>
+							</span>
+						</span>
+					</div>
+				</div>
+				{% endif %}
             {% else %}
             <div class="row col-lg-4 col-md-4 mt-md-2 top-forms ">
                 <div class="col-lg-6 col-md-4">
