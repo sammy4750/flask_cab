@@ -53,7 +53,7 @@
 			</div>
 			
             {% if current_user.is_authenticated %}
-				{% if current_user.first_name|length > 12 %}
+				{% if current_user.fname|length > 5%}
 				<div class="row col-lg-4 col-md-3 top-forms mt-md-2">
 					<div class="col-lg-2 col-md-4">
 						</div>
@@ -62,7 +62,7 @@
 							<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false">
 								<i class="fa fa-lg fa-user"></i>  &nbsp
-								<b>Welcome, {{current_user.first_name}}</b>&nbsp &nbsp
+								<b>Welcome, {{current_user.fname}}</b>&nbsp &nbsp
 								<i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
 							</a>
 							<span class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -113,10 +113,10 @@
                         <span class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item text-left" href="/user/login">
                                 <i class="fa fa-lock"></i> &nbsp 
-                                <b> Sign In To Ride</a></b>
+                                <b>To Ride</a></b>
                             <a class="dropdown-item text-left" href="/driver/login">
                                 <i class="fa fa-lock"></i> &nbsp
-                                <b> Sign In To Drive</a></b>
+                                <b>To Drive</a></b>
                         </span>
                     </span>
                 </div>
@@ -129,12 +129,12 @@
                             <i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
                         </a>
                         <span class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item text-left" href="/">
+                            <a class="dropdown-item text-left" href="/user/register1">
                                 <i class="fa fa-user"></i> &nbsp 
-                                <b> Register To Ride</a></b>
+                                <b>To Ride</a></b>
                             <a class="dropdown-item text-left" href="/driver/register">
                                 <i class="fa fa-user"></i> &nbsp
-                                <b> Register To Drive</a></b>
+                                <b>To Drive</a></b>
                         </span>
                     </span>
                 </div>

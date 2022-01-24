@@ -3,23 +3,31 @@
     
     <section class="bookingform py-5">
         <div class="container py-md-5 py-3">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert alert-danger text-center" role="alert">
+                        {{ messages[0] }}.
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <div class="row justify-content-center" role="document">
+                <div class="col-lg-6">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item" aria-current="page"><a href="/"> Home </a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Driver Register</li>
+                        </ol>
+                    </nav>
+                 </div>
+            </div>
             <h1 class="heading text-capitalize text-center">Register your account</h1>
             <h5 class="heading mb-5 text-center">Cammy Cab</h5>
             <div class="row justify-content-center" role="document">
                 <div class="col-lg-6">
-                    <div class="modal-header">
-                        <h5>Please Enter</h5>
+                    <div class="modal-header text-center">
+                        <h5 class="w-100">Please Enter Your Details</h5>
                     </div>
                     <div class="modal-body">
-                        {% with messages = get_flashed_messages() %}
-                            {% if messages %}
-                                <div class="notification is-danger text-light">
-                                    {{ messages[0] }}. 
-                                    <!-- Go to <a href="/login">Login</a> or check your email-id.  -->
-                                    <br><br>
-                                </div>
-                            {% endif %}
-                        {% endwith %}
                         <form action="/driver/register" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="recipient-fname" class="col-form-label">First Name</label>

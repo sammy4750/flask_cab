@@ -1,16 +1,19 @@
+import email
+from unicodedata import name
 from flask import Flask, render_template, request, redirect, flash
+import flask_login
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, ForeignKey
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
+from flask_login import login_user, LoginManager, logout_user, current_user # ,UserMixin, login_required
+from flask_user import roles_required, UserMixin, login_required, UserManager
 
 app = Flask(__name__)
 app.secret_key = "super secret key"
-
+app.config['USER_ENABLE_EMAIL'] = False
+# app.config['USER_ENABLE_AUTH0'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///users.db"
-app.config['SQLALCHEMY_BINDS'] = {
-    'db2': 'sqlite:///drivers.db'
-}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
@@ -19,48 +22,74 @@ migrate = Migrate(app,db)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'user_login'
 
 
-# @login_manager.user_loader
-# def load_user(user_id):
-#     return users.query.get(int(user_id))
 @login_manager.user_loader
-def load_user(driver_id):
-    return drivers.query.get(int(driver_id))
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
-#  Database Models
-
-class users(db.Model, UserMixin):
+class User(db.Model, UserMixin):
+    __table_name__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(50), nullable=False)
     lname = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(100), nullable=False, unique=True)
-    contact = db.Column(db.Integer, nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
+    type = db.Column(db.String(20))
+    rider = db.relationship("Rider")
+    driver = db.relationship("Driver")
+    roles = db.relationship('Role', secondary='user_roles')
+
+    __mapper_args__ = {
+        'polymorphic_on':type,
+         'polymorphic_identity':'User'
+    }
 
     def __repr__(self) -> str:
-        return "{}{}".format(self.id,self.email)
+        return "{}{}".format(self.id,self.fname)
+        
+user_manager = UserManager(app, db, User)
 
-class drivers(db.Model, UserMixin):
-    __bind_key__ = 'db2'
-    id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(50), nullable=False)
-    last_name = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(100), nullable=False, unique=True)
-    contact = db.Column(db.Integer, nullable=False, unique=True)
+class Rider(User, db.Model):
+    rider_id = db.Column(ForeignKey('user.id'), primary_key=True)
+    rider_email = db.Column(db.String(100), nullable=False, unique=True)
+    rider_contact = db.Column(db.Integer, nullable=False, unique=True)
+
+    __mapper_args__ = {
+        'polymorphic_identity':'Rider'
+    }
+
+class Driver(User, db.Model):
+    driver_id = db.Column(ForeignKey('user.id'), primary_key=True)
     file_name = db.Column(db.String(200), nullable=False)
     original_file = db.Column(db.LargeBinary)
-    password = db.Column(db.String(100),nullable=False)
+    driver_email = db.Column(db.String(100), nullable=False, unique=True)
+    driver_contact = db.Column(db.Integer, nullable=False, unique=True)
 
+    __mapper_args__ = {
+        'polymorphic_identity':'Driver'
+    }
+
+# Define the Role data-model
+class Role(db.Model):
+    __tablename__ = 'roles'
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(50))
+
+# Define the UserRoles association table
+class UserRoles(db.Model):
+    __tablename__ = 'user_roles'
+    id = db.Column(db.Integer(), primary_key=True)
+    user_id = db.Column(db.Integer(), ForeignKey('user.id', ondelete='CASCADE'))
+    role_id = db.Column(db.Integer(), ForeignKey('roles.id', ondelete='CASCADE'))
 
 # User Side
-
 @app.route('/')
 def user_index():
     return render_template("/user/index.html")
 
 @app.route('/user/booking')
+@roles_required("Rider")
 @login_required
 def booking():
     return render_template("/user/booking.html")
@@ -74,8 +103,7 @@ def about():
     return render_template("/user/about.html")
 
 # Register, Login and Logout
-
-@app.route('/user/register', methods=['GET', 'POST'])
+@app.route('/user/register1', methods=['GET', 'POST'])
 def user_register():
     if request.method == 'POST':
         fname = request.form['fname']
@@ -85,8 +113,8 @@ def user_register():
         password = request.form['password']
         cpassword = request.form['cpassword']
 
-        data = users.query.filter_by(email=email).first()
-        data1 = users.query.filter_by(contact=contact).first()
+        data = Rider.query.filter_by(rider_email=email).first()
+        data1 = Rider.query.filter_by(rider_contact=contact).first()
         if data:
             flash('Email is already registered')
             return redirect("/user/register")
@@ -95,10 +123,11 @@ def user_register():
             return redirect("/user/register")
 
         if password==cpassword:
-            registration = users(fname=fname,lname=lname,email=email,contact=contact,password=generate_password_hash(password,method='sha256'))
+            registration = Rider(fname=fname,lname=lname,rider_email=email,rider_contact=contact,password=generate_password_hash(password,method='sha256'))
+            registration.roles=[Role(name='Rider')]
             db.session.add(registration)
             db.session.commit()
-            login_user(registration, remember=True)
+            login_user(registration) #remember=True
             return redirect("/")
         else:
             flash('Confirm Password is not same as the Password')
@@ -113,7 +142,7 @@ def user_login():
         password = request.form['password']
         # remem = request.form['remember']
 
-        data = users.query.filter_by(email=email).first()
+        data = Rider.query.filter_by(rider_email=email).first()
 
         if not data or not check_password_hash(data.password, password):
             flash('Please check your login credentials')
@@ -122,7 +151,7 @@ def user_login():
         #     login_user(data, remember=True)
         # else:
         #     login_user(data, remember=False)
-        login_user(data, remember=True)
+        login_user(data) # remember=True
         return redirect("/")
 
     return render_template("/user/login.html")
@@ -134,13 +163,14 @@ def user_logout():
     return redirect("/user/login")
 
 #Edit Profile and Password
-
 @app.route('/user/editprofile')
+@roles_required("Rider")
 @login_required
 def user_editprofile():
     return render_template("/user/editprofile.html")
 
 @app.route('/user/update/<int:id>', methods=['GET', 'POST'])
+@roles_required("Rider")
 @login_required
 def user_update(id):
     if request.method == 'POST':
@@ -148,10 +178,10 @@ def user_update(id):
         lname = request.form['lname']
         contact = request.form['contact']
 
-        data = users.query.filter_by(id=id).first()
+        data = User.query.filter_by(id=id).first()
         data.fname = fname
         data.lname = lname
-        data.contact = contact
+        data.rider_contact = contact
         db.session.add(data)
         db.session.commit()
 
@@ -159,11 +189,13 @@ def user_update(id):
     return redirect('/user/editprofile')
 
 @app.route('/user/editpass')
+@roles_required("Rider")
 @login_required
 def user_editpass():
     return render_template("/user/editpass.html")
 
 @app.route('/user/updatepass/<int:id>', methods=['GET', 'POST'])
+@roles_required("Rider")
 @login_required
 def user_updatepass(id):
     if request.method == 'POST':
@@ -171,14 +203,18 @@ def user_updatepass(id):
         npassword = request.form['npassword']
         cnpassword = request.form['cnpassword']
 
-        data = users.query.filter_by(id=id).first()
+        data = User.query.filter_by(id=id).first()
 
         if check_password_hash(data.password,opassword):
             if npassword==cnpassword:
                 data.password = generate_password_hash(npassword)
                 db.session.add(data)
                 db.session.commit()
-                return redirect("/")
+                flash("Your password has been changed.")
+                email = current_user.rider_email
+                data = Rider.query.filter_by(rider_email=email).first()
+                login_user(data)
+                return redirect("/user/editpass")
             else:
                 flash('Confirm Password is not same as the Password')
                 return redirect("/user/editpass")
@@ -189,7 +225,6 @@ def user_updatepass(id):
         
 
 # Driver Side
-
 @app.route('/driver/home')
 def home():
     return render_template('/driver/home.html')
@@ -205,8 +240,8 @@ def driver_register():
         password = request.form['password']
         cpassword = request.form['cpassword']
 
-        data = drivers.query.filter_by(email=email).first()
-        data1 = users.query.filter_by(contact=contact).first()
+        data = Driver.query.filter_by(driver_email=email).first()
+        data1 = Driver.query.filter_by(driver_contact=contact).first()
         if data:
             flash('Email is already registered')
             return redirect("/driver/register")
@@ -215,10 +250,11 @@ def driver_register():
             return redirect("/driver/register")
 
         if password==cpassword:
-            registration = drivers(first_name=fname,last_name=lname,email=email,contact=contact,file_name=file.filename,original_file=file.read(),password=generate_password_hash(password,method='sha256'))
+            registration = Driver(fname=fname,lname=lname,driver_email=email,driver_contact=contact,file_name=file.filename,original_file=file.read(),password=generate_password_hash(password,method='sha256'))
+            registration.roles=[Role(name='Driver')]
             db.session.add(registration)
             db.session.commit()
-            login_user(registration, remember=True)
+            login_user(registration) # remember=True
             return redirect("/driver/home")
         else:
             flash('Confirm Password is not same as the Password')
@@ -231,17 +267,18 @@ def driver_login():
         email = request.form['email']
         password = request.form['password']
 
-        data = drivers.query.filter_by(email=email).first()
+        data = Driver.query.filter_by(driver_email=email).first()
 
         if not data or not check_password_hash(data.password, password):
             flash('Please check your login credentials')
             return redirect('/driver/login')
-        login_user(data, remember=True)
+        login_user(data) #remember=True
         return redirect("/driver/home")
 
     return render_template("/driver/login.html")
 
 @app.route('/driver/logout',methods=['GET', 'POST'])
+@roles_required("Driver")
 @login_required
 def driver_logout():
     logout_user()
@@ -250,11 +287,13 @@ def driver_logout():
 # Edit Profile and Password
 
 @app.route('/driver/editprofile')
+@roles_required("Driver")
 @login_required
 def driver_editprofile():
     return render_template("/driver/editprofile.html")
 
 @app.route('/driver/update/<int:id>', methods=['GET', 'POST'])
+@roles_required("Driver")
 @login_required
 def driver_update(id):
     if request.method == 'POST':
@@ -262,10 +301,10 @@ def driver_update(id):
         lname = request.form['lname']
         contact = request.form['contact']
 
-        data = drivers.query.filter_by(id=id).first()
-        data.first_name = fname
-        data.last_name = lname
-        data.contact = contact
+        data = Driver.query.filter_by(id=id).first()
+        data.fname = fname
+        data.lname = lname
+        data.driver_contact = contact
         db.session.add(data)
         db.session.commit()
 
@@ -273,11 +312,13 @@ def driver_update(id):
     return redirect('/drriver/editprofile')
 
 @app.route('/driver/editpass')
+@roles_required("Driver")
 @login_required
 def driver_editpass():
     return render_template("/driver/editpass.html")
 
 @app.route('/driver/updatepass/<int:id>', methods=['GET', 'POST'])
+@roles_required("Driver")
 @login_required
 def driver_updatepass(id):
     if request.method == 'POST':
@@ -285,14 +326,18 @@ def driver_updatepass(id):
         npassword = request.form['npassword']
         cnpassword = request.form['cnpassword']
 
-        data = drivers.query.filter_by(id=id).first()
+        data = Driver.query.filter_by(id=id).first()
 
         if check_password_hash(data.password,opassword):
             if npassword==cnpassword:
                 data.password = generate_password_hash(npassword)
                 db.session.add(data)
                 db.session.commit()
-                return redirect("/driver/home")
+                flash("Your password has been changed.")
+                email = current_user.driver_email
+                data = Driver.query.filter_by(driver_email=email).first()
+                login_user(data)
+                return redirect("/driver/editpass")
             else:
                 flash('Confirm Password is not same as the Password')
                 return redirect("/driver/editpass")
@@ -303,13 +348,6 @@ def driver_updatepass(id):
 
 
 
-
-
-
-
-
-
 # Run Code
-
 if __name__=="__main__":
     app.run(debug=True)
