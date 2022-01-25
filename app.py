@@ -1,7 +1,6 @@
 import email
 from unicodedata import name
 from flask import Flask, render_template, request, redirect, flash
-import flask_login
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, ForeignKey
@@ -140,17 +139,12 @@ def user_login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        # remem = request.form['remember']
 
         data = Rider.query.filter_by(rider_email=email).first()
 
         if not data or not check_password_hash(data.password, password):
             flash('Please check your login credentials')
             return redirect('/user/login')
-        # if remem:
-        #     login_user(data, remember=True)
-        # else:
-        #     login_user(data, remember=False)
         login_user(data) # remember=True
         return redirect("/")
 
