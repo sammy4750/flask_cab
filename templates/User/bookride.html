@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookride</title>
+
+</head>
+
+	<!-- Meta tag Keywords -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta name="keywords" content="Taxi Cab Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+	<script type="application/x-javascript">
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!--// Meta tag Keywords -->
+
+    <link href="{{ url_for('static', filename='css/wickedpicker.css') }}" rel="stylesheet" type='text/css' media="all" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.css') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.css') }}" type="text/css" media="all">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.css') }}" type="text/css" media="all" >
+
+	<!-- css files -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}"> <!-- Bootstrap-Core-CSS -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" media="all" /> <!-- Style-CSS --> 
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome-all.css') }}"> <!-- Font-Awesome-Icons-CSS -->
+	<!-- //css files -->
+
+	<!-- web-fonts -->
+	<link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+	<!-- //web-fonts -->
+	
+</head>
+
+<body>
+
+<!--/banner-->
+	<div class="top-bar_sub_w3layouts container-fluid">
+		<div class="row">
+			<div class="col-lg-4 col-md-4 col-sm-6 log-icons mt-2 text-left">
+				<p class="py-2"><i class="fas fa-phone"></i><b> Call for Support : (+91) 8488 886 344 </p></b>
+			</div>
+			
+			<div class="col-lg-4 col-md-4 col-sm-6 logo">
+				<a class="navbar-brand" href="/">
+					<i class="fas fa-taxi"></i> Cammy Cab</a>
+			</div>
+			
+				{% if current_user.is_authenticated %}
+					{% if current_user.fname|length > 12 %}
+					<div class="row col-lg-4 col-md-3 top-forms mt-md-2">
+						<div class="col-lg-2 col-md-4">
+
+						</div>
+						<div class="col-lg-10 col-md-4 text-left">
+							<span class="nav-item dropdown">
+								<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">
+									<i class="fa fa-lg fa-user"></i>  &nbsp
+									<b>Welcome, {{current_user.fname}}</b>&nbsp &nbsp
+									<i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
+								</a>
+								<span class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item text-left" href="/user/editprofile">
+										<i class="fa fa-cog"></i> &nbsp 
+										<b> Edit Profile</a></b>
+									<a class="dropdown-item text-left" href="/user/logout">
+										<i class="fa fa-sign-out-alt"></i> &nbsp
+										<b> Logout</a></b>
+								</span>
+							</span>
+						</div>
+					</div>
+					{% else %}
+					<div class="row col-lg-4 col-md-3 top-forms mt-md-2">
+						<div class="col-lg-4 col-md-4">
+
+						</div>
+						<div class="col-lg-8 col-md-4 text-left">
+							<span class="nav-item dropdown">
+								<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">
+									<i class="fa fa-lg fa-user"></i>  &nbsp
+									<b>Welcome, {{current_user.fname}}</b>&nbsp &nbsp
+									<i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
+								</a>
+								<span class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item text-left" href="/user/editprofile">
+										<i class="fa fa-cog"></i> &nbsp 
+										<b> Edit Profile</a></b>
+									<a class="dropdown-item text-left" href="/user/logout">
+										<i class="fa fa-sign-out-alt"></i> &nbsp
+										<b> Logout</a></b>
+								</span>
+							</span>
+						</div>
+					</div>
+					{% endif %}
+				{% else %}
+				<div class="row col-lg-4 col-md-4 mt-md-2 top-forms ">
+					<div class="col-lg-6 col-md-4">
+						<span class="nav-item dropdown">
+							<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> 
+								<i class="fa fa-lg fa-lock"></i>  &nbsp
+								<b>Sign In</b>&nbsp &nbsp
+								<i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
+							</a>
+							<span class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item text-left" href="/user/login">
+									<i class="fa fa-user"></i> &nbsp 
+									<b> To Ride</a></b>
+								<a class="dropdown-item text-left" href="/driver/login">
+									<i class="fa fa-car"></i> &nbsp
+									<b> To Drive</a></b>
+							</span>
+						</span>
+					</div>
+					<div class="col-lg-6 col-md-4">
+						<span class="nav-item dropdown">
+							<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false"> 
+								<i class="fa fa-lg fa-user"></i>  &nbsp
+								<b>Register</b>&nbsp &nbsp
+								<i class="fa fa-angle-down" style="color: black;" aria-hidden="true"></i>
+							</a>
+							<span class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a style="display: inline-block" class="dropdown-item text-left" href="/user/register1">
+									<i class="fa fa-user"></i> &nbsp 
+									<b> To Ride</a></b>
+								<a style="display: inline-block" class="dropdown-item text-left" href="/driver/register">
+									<i class="fa fa-car"></i> &nbsp
+									<b> To Drive</a></b>
+							</span>
+						</span>
+					</div>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-3" style=" height: 850px;">
+				<div class="card text-white bg-dark mb-3 border-warning" style="width: 100%; height: 100%;">
+					<!-- <img class="card-img-top" src="https://blog.grabon.in/wp-content/uploads/2017/01/olacabs.jpg" alt="Card image cap"> -->
+					<div class="card-body">
+						<div id="accordion">
+							<div class="card">
+							  <div class="card-header" id="headingOne">
+								<h5 class="mb-0">
+								  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+									<i class="fa fa-home" aria-hidden="true"></i>&nbsp &nbsp
+									Choose from a Saved Trip
+								  </button>
+								</h5>
+							  </div>
+						  
+							  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+								<div class="card-body text-dark">
+									<a href="">1. Home</a> 
+								</div>
+							  </div>
+							</div>
+							<hr class="white">
+							<div class="card">
+								<div class="card-header" id="headingTwo">
+								  <h5 class="mb-0">
+									<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+									<i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp &nbsp
+									  Enter new location
+									</button>
+								  </h5>
+								</div>
+								<div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+								  <div class="card-body text-dark">
+									<h5 class="card-title">Enter Origin and Destination</h5>
+									<form id="send_location_info" class="mt-4" action="" method="POST">
+										<div class="form-group">
+										<!-- Assigning value to the input field using the object sent from the view definition -->
+										<input type="text" class="form-control" value="{% if name %} {{name[0]}} {% endif %}" id="origin" placeholder="Origin">
+										</div>
+										<div class="form-group">
+										<!-- Assigning value to the input field using the object sent from the view definition -->
+										<input type="text" class="form-control" value="{% if name %} {{name[1]}} {% endif %}" id="destination" placeholder="Destination">
+										</div>
+										<!-- The type of input field is set to "hidden" because they are used only for sending data to backend using JavaScript-->
+										<input type="hidden" id="origin_coordinates" value="" name="origin_coordinates">
+										<input type="hidden" id="destination_coordinates" value="" name="destination_coordinates">
+										<input type="hidden" id='origin_place_id' value="" name="origin_place_id">
+										<input type="hidden" id="destination_place_id" value="" name="destination_place_id">
+										<input type="hidden" id="origin_name" value="" name="origin_name">
+										<input type="hidden" id="destination_name" value="" name="destination_name">
+									</form>
+									<br><br>
+									<h6 class="display-5">Enter Complete Address</h6>
+									
+									<form id="send_address" class="mt-4" action="" method="POST">
+										<div class="form-group">
+											<input type="text" class="form-control" id="floor" placeholder="HOUSE / FLAT / BLOCK NO.">
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" id="floor" placeholder="APARTMENT / COMPLEX NAME">
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" id="floor" placeholder="LANDMARK">
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" id="floor" placeholder="ZIPCODE">
+										</div>
+										<div class="form-group">
+											<input type="text" class="form-control" id="floor" placeholder="DIRECTIONS TO REACH">
+										</div>
+										<button type="submit" class="btn btn-primary">Submit</button>
+									</form>
+								  </div>
+								</div>
+							  </div>
+						</div>
+					  
+					  <br><br>
+					  <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+					</div>
+				  </div>
+			</div>
+			{% block content %}
+
+			{% endblock %}
+		</div>
+	</div>
+    
+	<footer class="py-sm-5 py-4 px-md-5 px-3">
+		<div class="container-fluid pt-lg-5">
+			<div class="row">
+				<div class="col-lg-3 col-sm-6 mb-lg-0 mb-5 footer-grid-agileits-w3ls1 text-left">
+					<h3 class="mb-sm-5 mb-4 mt-sm-0 mt-4">About Company</h3>	
+					<p>The Cammy Cab offers the safest and easiest way to ride, with multiple travel options and well-protected rides. With more than 3,00,000 vehicles in 100+ cities including Bangalore, Chennai, Delhi, Mumbai, Hyderabad, Kolkata, and Pune, Cammy is the most popular ride hailing service in India.</p>
+					<a href="/user/about" class="read">Know More <i class="fas fa-caret-right"></i></a>
+				</div>
+				<div class="col-lg-3 col-sm-6 mb-lg-0 mb-5 footer-grid-agileits-w3ls1 text-left">
+					<h3 class="mb-sm-5 mb-4">Locate Us</h3>	
+					<ul class="w3ls-footer-bottom-list">
+						<li> <span class="fas fa-map-marker"></span> 402, Shakti-Suman Flats,<span> Gujarat, India </span></li>
+						<li> <span class="fas fa-envelope"></span> <a href="mailto:name@example.com"> info@cammy.com</a> </li>
+						<li> <span class="fas fa-phone"></span> (+91)8488886344 </li>
+						<li> <span class="fas fa-globe"></span> <a href="#"> www.cammy.com</a> </li>
+						<li> <span class="fas fa-clock"></span> Office Time  : 8:00 a.m - 6:00 p.m</li>
+					</ul>
+				</div>
+				<!-- subscribe -->
+				<div class="col-lg-3 col-sm-6 mb-lg-0 mb-5 footer-grid-agileits-w3ls1 text-left">
+					<!-- //subscribe -->
+					<div class="footer-social">
+						<!--div class="copyrighttop"-->
+							<h3 class="mb-sm-5 mb-4">Stay In Touch</h3>
+							<ul class="w3ls-footer-bottom-list">
+								<li class="mr-1">
+									<a class="facebook" href="#">
+										<i class="fab fa-facebook-f"></i>									
+									</a>
+								<li class="mr-1">
+									<a class="facebook" href="#">
+										<i class="fab fa-twitter"></i>
+									</a>
+								</li>
+								<li class="mr-1">
+									<a class="facebook" href="#">
+										<i class="fab fa-google-plus-g"></i>
+									</a>
+								</li>
+								<li class="mr-1">
+									<a class="facebook" href="#">
+										<i class="fab fa-pinterest-p"></i>
+									</a>
+								</li>
+								<li>
+									<a class="facebook" href="#">
+										<i class="fab fa-linkedin-in"></i>
+									</a>
+								</li>
+							</ul>
+	
+						<!--/div-->
+					</div>
+				</div>
+			</div>
+			<!-- copyright -->
+			<div class="footer-cpy text-center pt-sm-5 mt-sm-5 mt-4 pt-3">
+				<div class="w3layouts-agile-copyrightbottom">
+					<p>© 2022 Cammy Cab. All Rights Reserved | Design by
+						<a href="/">Cammy Group of Technology</a>
+					</p>
+				</div>
+			</div>
+			<!-- //copyright -->
+		</div>
+	</footer>
+	<!-- //footer -->
+    </body>
+	<!-- Google Maps Javascript API to get suggestions and collect location from user. -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdQ3Jx0mPk6J9vNVdKN-tSDCM5eYk9abs&libraries=places"></script>
+    <script>
+    function initialize() {
+
+	  // Get element from which input should be taken
+      var input = document.getElementById('origin');
+	  var input_2 = document.getElementById('destination');
+
+	  // Initialize an object for the Google Maps Autocomplete API service (Since we have both origin and destination,
+	  // we will create two objects, one for each)
+      autocomplete = new google.maps.places.Autocomplete(input, 
+      {
+		  // This are the place parameters that google will use to return results.
+		  // This can help to reduce API usage costs by reducing the number of results.
+        types: ['establishment'],
+        componentRestrictions: {'country':['IN']},
+        fields: ['place_id','geometry','name']
+      }); 
+	  autocomplete_2 = new google.maps.places.Autocomplete(input_2, 
+      {
+        types: ['establishment'],
+        componentRestrictions: {'country':['IN']},
+        fields: ['place_id','geometry','name']
+      });
+
+	  // This will call "onPlaceChanged" function when an option from the dropdown suggestions is selected.
+	  // 'place_changed' is a value in google maps JavaScript API
+      autocomplete_2.addListener('place_changed', onPlaceChanged);
+    }
+
+	// This line is responsible for displaying dropdown suggestions to the input field.
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    function onPlaceChanged() {
+		// Using the object created in previous method, we will call "getPlace()" function (provided by google), to get 
+		// place details like geometry and place_id (Geometry means latitude and longitude).
+      var origin_place = autocomplete.getPlace();
+
+	  //We are using JSON 'stringify' function to convert the returned object into string for passing as text using the html form.
+      origin_place_string = JSON.stringify(origin_place.geometry)
+	  origin_place_id = JSON.stringify(origin_place.place_id)
+	//   origin_place_name = JSON.stringify(origin_place.name)
+
+	  var destination_place = autocomplete_2.getPlace();
+	  destination_place_string = JSON.stringify(destination_place.geometry)
+	  destination_place_id = JSON.stringify(destination_place.place_id)
+	//   destination_place_name = JSON.stringify(destination_place.name)
+
+	  // We will check if the user has selected an input from the dropdown or has typed something himself without selecting anything from the dropdown.
+	  // This can be checked if the location has a geometry.
+      if (!origin_place.geometry || !destination_place.geometry) {
+        document.getElementById('origin').placeholder = 'Enter a Place';
+		document.getElementById('destination').placeholder = 'Enter a Place';
+      } else {
+
+        // Setting Origin values to the hidden fields in the form.
+        document.getElementById('origin_coordinates').value = origin_place_string;
+		document.getElementById('origin_place_id').value = origin_place_id
+		document.getElementById("origin_name").value = origin_place.name
+
+		// Setting Destination Values to the hidden fields in the form.
+		document.getElementById('destination_coordinates').value = destination_place_string;
+		document.getElementById('destination_place_id').value = destination_place_id
+		document.getElementById('destination_name').value = destination_place.name
+
+		// Submitting form that has id="send_geometry" using the JavaScript "submit()" method.
+		document.getElementById('send_location_info').submit();
+      }
+    }
+	
+  </script>
+
+<!-- js-scripts -->		
+
+	<!-- js -->
+	<!-- <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>  -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<!-- //js -->
+	
+	<!-- carousel -->
+	<script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
+	<script>
+		$(document).ready(function () {
+			$('.owl-carousel').owlCarousel({
+				loop: true,
+				margin: 10,
+				responsiveClass: true,
+				responsive: {
+					0: {
+						items: 1,
+						nav: true
+					},
+					600: {
+						items: 1,
+						nav: false
+					},
+					900: {
+						items: 2,
+						nav: false
+					},
+					1000: {
+						items: 3,
+						nav: true,
+						loop: false,
+						margin: 20
+					}
+				}
+			})
+		})
+	</script>
+	<!-- //carousel -->
+
+	<!--slider-->
+	<script src="{{ url_for('static', filename='js/responsiveslides.min.js') }}"></script>
+	<script>
+		$(function () {
+			// Slideshow 1
+			$("#slider1").responsiveSlides({
+				auto: true,
+				pager: true,
+				nav: true,
+				speed: 500,
+				namespace: "centered-btns"
+			});
+		});
+	</script>
+	<!--//slider-->
+
+	<!-- start-smoth-scrolling -->
+	<script src="{{ url_for('static', filename='js/SmoothScroll.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/move-top.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/easing.js') }}"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){		
+				event.preventDefault();
+				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			});
+		});
+	</script>
+	<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+	<!-- //here ends scrolling icon -->
+	<!-- start-smoth-scrolling -->
+	
+<!-- //js-scripts -->
+    </html>

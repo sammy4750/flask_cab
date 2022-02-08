@@ -79,6 +79,10 @@ hr {
   overflow: visible;
 }
 
+hr.white {
+  border-top: 1px solid white
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -4696,7 +4700,7 @@ tbody.collapse.show {
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #e9ecef;
+  background-color: none;   /* default color code: #e9ecef */
   border-radius: 0.25rem;
 }
 
