@@ -150,7 +150,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-lg-3" style=" height: 850px;">
+			<div class="col-lg-3" style=" height: 830px;">
 				<div class="card text-white bg-dark mb-3 border-warning" style="width: 100%; height: 100%;">
 					<!-- <img class="card-img-top" src="https://blog.grabon.in/wp-content/uploads/2017/01/olacabs.jpg" alt="Card image cap"> -->
 					<div class="card-body">
@@ -158,7 +158,7 @@
 							<div class="card">
 							  <div class="card-header" id="headingOne">
 								<h5 class="mb-0">
-								  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+								  <button class="btn btn-link" style="text-decoration: none;" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
 									<i class="fa fa-home" aria-hidden="true"></i>&nbsp &nbsp
 									Choose from a Saved Trip
 								  </button>
@@ -175,7 +175,7 @@
 							<div class="card">
 								<div class="card-header" id="headingTwo">
 								  <h5 class="mb-0">
-									<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+									<button class="btn btn-link collapsed" style="text-decoration: none;" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
 									<i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp &nbsp
 									  Enter new location
 									</button>
@@ -200,27 +200,23 @@
 										<input type="hidden" id="destination_place_id" value="" name="destination_place_id">
 										<input type="hidden" id="origin_name" value="" name="origin_name">
 										<input type="hidden" id="destination_name" value="" name="destination_name">
-									</form>
-									<br><br>
-									<h6 class="display-5">Enter Complete Address</h6>
-									
-									<form id="send_address" class="mt-4" action="" method="POST">
+										<br><br>
+										<h6 class="display-5">Enter Complete Address</h6><br>
 										<div class="form-group">
-											<input type="text" class="form-control" id="floor" placeholder="HOUSE / FLAT / BLOCK NO.">
+											<input required type="text" class="form-control" id="floor" placeholder="HOUSE / FLAT / BLOCK NO.">
 										</div>
 										<div class="form-group">
-											<input type="text" class="form-control" id="floor" placeholder="APARTMENT / COMPLEX NAME">
+											<input required type="text" class="form-control" id="floor" placeholder="APARTMENT / COMPLEX NAME">
 										</div>
 										<div class="form-group">
-											<input type="text" class="form-control" id="floor" placeholder="LANDMARK">
+											<input required type="text" class="form-control" id="floor" placeholder="LANDMARK">
 										</div>
 										<div class="form-group">
-											<input type="text" class="form-control" id="floor" placeholder="ZIPCODE">
+											<input required type="text" class="form-control" id="floor" placeholder="ZIPCODE">
 										</div>
 										<div class="form-group">
-											<input type="text" class="form-control" id="floor" placeholder="DIRECTIONS TO REACH">
+											<button type="submit" class=" form-control btn btn-primary text-white"><b>Click to View Rides</b></button>
 										</div>
-										<button type="submit" class="btn btn-primary">Submit</button>
 									</form>
 								  </div>
 								</div>
@@ -233,7 +229,9 @@
 				  </div>
 			</div>
 			{% block content %}
-
+			<!-- <div class="col-lg-9 text-center">
+				<h1 class="display-1">Please Enter Origin and Destination to get Ride details</h1>
+			</div> -->
 			{% endblock %}
 		</div>
 	</div>
@@ -360,6 +358,7 @@
       if (!origin_place.geometry || !destination_place.geometry) {
         document.getElementById('origin').placeholder = 'Enter a Place';
 		document.getElementById('destination').placeholder = 'Enter a Place';
+
       } else {
 
         // Setting Origin values to the hidden fields in the form.
@@ -373,8 +372,18 @@
 		document.getElementById('destination_name').value = destination_place.name
 
 		// Submitting form that has id="send_geometry" using the JavaScript "submit()" method.
-		document.getElementById('send_location_info').submit();
+		// document.getElementById('send_location_info').submit();
+
+		map = new google.maps.Map(document.getElementById('map'), {
+				center: origin_place.geometry.location,
+				zoom: 19
+			})
+			new google.maps.Marker({
+				position: origin_place.geometry.location, map, title:"Hey"
+			})
+		
       }
+
     }
 	
   </script>
@@ -468,6 +477,23 @@
 	</script>
 	<!-- //here ends scrolling icon -->
 	<!-- start-smoth-scrolling -->
+	<!-- <script>
+		function initMap(name) {
+			coordinates = name
+			console.log("Hey")
+			console.log(coordinates)
+			
+
+		}
+		google.maps.event.addDomListener(window, 'load', initMap);
+		
+	</script> -->
+	
+	<!-- <script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdQ3Jx0mPk6J9vNVdKN-tSDCM5eYk9abs&callback=initMap()">
+	
+	</script> -->
+	
 	
 <!-- //js-scripts -->
     </html>
