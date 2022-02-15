@@ -37,12 +37,11 @@
 	
 </head>
 
-<body>
-
+<body onload="load_preloader()">
+	<div id="load"></div>
 <!--/banner-->
 	<div class="top-bar_sub_w3layouts container-fluid">
 		<div class="row">
-			
 			<div class="col-lg-4 col-md-4 col-sm-6 log-icons mt-2 text-left">
 				<p class="py-2"><i class="fas fa-phone"></i><b> Call for Support : (+91) 8488 886 344 </p></b>
 			</div>
@@ -145,7 +144,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="banner" id="home">
 		<!-- header -->
 		<header>
@@ -345,7 +343,13 @@
 	</script>
 	<!-- //here ends scrolling icon -->
 	<!-- start-smoth-scrolling -->
-	
+	<script>
+		var preloader = document.getElementById('load')
+
+		function load_preloader(){
+			preloader.style.display = 'none';
+		}
+	</script>
 <!-- //js-scripts -->
 
 </body>

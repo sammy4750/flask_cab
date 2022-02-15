@@ -364,13 +364,13 @@ def bookride():
         destination_name = request.form['destination_name']
 
         # Converting string back into dictionary
-        origin_coordinates_dict = json.loads(origin_coordinates)
-        destination_coordinates_dict = json.loads(destination_coordinates)
+        # origin_coordinates_dict = json.loads(origin_coordinates)
+        # destination_coordinates_dict = json.loads(destination_coordinates)
 
         # Printing Data
         print("Origin co-ordinates are: " + origin_coordinates)
         print("origin coordinates dict is: ")
-        print(origin_coordinates_dict)
+        # print(origin_coordinates_dict)
         print("Origin Place id is: " + origin_place_id)
         print("Origin Place name is: " + origin_name)
         
@@ -379,7 +379,7 @@ def bookride():
         print("Destination Place name is: " + destination_name)
 
         return render_template('user/ridedetails.html', name=[origin_name,destination_name])
-    return render_template('/user/ridedetails.html')
+    return render_template('user/bookride.html')
 
 @app.route('/ride')
 def ride():

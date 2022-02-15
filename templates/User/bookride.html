@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookride</title>
-
+{% block head %}
 </head>
 
 	<!-- Meta tag Keywords -->
@@ -41,9 +41,9 @@
 	<!-- //web-fonts -->
 	
 </head>
-
-<body>
-
+{% endblock %}
+<body onload="load_preloader()">
+	<div id="load"></div>
 <!--/banner-->
 	<div class="top-bar_sub_w3layouts container-fluid">
 		<div class="row">
@@ -187,11 +187,11 @@
 									<form id="send_location_info" class="mt-4" action="" method="POST">
 										<div class="form-group">
 										<!-- Assigning value to the input field using the object sent from the view definition -->
-										<input type="text" class="form-control" value="{% if name %} {{name[0]}} {% endif %}" id="origin" placeholder="Origin">
+										<input required type="text" class="form-control" value="{% if name %} {{name[0]}} {% endif %}" id="origin" placeholder="Origin">
 										</div>
 										<div class="form-group">
 										<!-- Assigning value to the input field using the object sent from the view definition -->
-										<input type="text" class="form-control" value="{% if name %} {{name[1]}} {% endif %}" id="destination" placeholder="Destination">
+										<input required type="text" class="form-control" value="{% if name %} {{name[1]}} {% endif %}" id="destination" placeholder="Destination">
 										</div>
 										<!-- The type of input field is set to "hidden" because they are used only for sending data to backend using JavaScript-->
 										<input type="hidden" id="origin_coordinates" value="" name="origin_coordinates">
@@ -200,8 +200,14 @@
 										<input type="hidden" id="destination_place_id" value="" name="destination_place_id">
 										<input type="hidden" id="origin_name" value="" name="origin_name">
 										<input type="hidden" id="destination_name" value="" name="destination_name">
-										<br><br>
-										<h6 class="display-5">Enter Complete Address</h6><br>
+										<!-- <input type="text" name="test" id="test" value=""> -->
+										<div class="form-group">
+											<button  onclick="getDirections()" type="text" class=" form-control btn btn-warning text-white btn-sm"><b>Confirm</b></button>
+										</div>	<!--  -->
+										
+									</form>
+									<form id="send_address" class="mt-4" action="" method="POST">
+										<h6 class="display-5">Enter Your Complete Address</h6><br>
 										<div class="form-group">
 											<input required type="text" class="form-control" id="floor" placeholder="HOUSE / FLAT / BLOCK NO.">
 										</div>
@@ -229,9 +235,19 @@
 				  </div>
 			</div>
 			{% block content %}
-			<!-- <div class="col-lg-9 text-center">
-				<h1 class="display-1">Please Enter Origin and Destination to get Ride details</h1>
-			</div> -->
+			<div class="col-lg-9">
+				<h2 class="border border-warning rounded mt-1 bg-dark text-white text-center" style="padding: 20px;">Ride Details 
+				  <span style="float:left" class="fas fa-taxi"></span>
+			   </h2>
+				  <br>
+			   <div class="row">
+				  <div class="col-lg-12">
+					 <div id ="map" style="height: 680px;">
+
+					  </div>
+				  </div>
+			   </div>
+			 </div>
 			{% endblock %}
 		</div>
 	</div>
@@ -306,88 +322,9 @@
     </body>
 	<!-- Google Maps Javascript API to get suggestions and collect location from user. -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdQ3Jx0mPk6J9vNVdKN-tSDCM5eYk9abs&libraries=places"></script>
-    <script>
-    function initialize() {
-
-	  // Get element from which input should be taken
-      var input = document.getElementById('origin');
-	  var input_2 = document.getElementById('destination');
-
-	  // Initialize an object for the Google Maps Autocomplete API service (Since we have both origin and destination,
-	  // we will create two objects, one for each)
-      autocomplete = new google.maps.places.Autocomplete(input, 
-      {
-		  // This are the place parameters that google will use to return results.
-		  // This can help to reduce API usage costs by reducing the number of results.
-        types: ['establishment'],
-        componentRestrictions: {'country':['IN']},
-        fields: ['place_id','geometry','name']
-      }); 
-	  autocomplete_2 = new google.maps.places.Autocomplete(input_2, 
-      {
-        types: ['establishment'],
-        componentRestrictions: {'country':['IN']},
-        fields: ['place_id','geometry','name']
-      });
-
-	  // This will call "onPlaceChanged" function when an option from the dropdown suggestions is selected.
-	  // 'place_changed' is a value in google maps JavaScript API
-      autocomplete_2.addListener('place_changed', onPlaceChanged);
-    }
-
-	// This line is responsible for displaying dropdown suggestions to the input field.
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-    function onPlaceChanged() {
-		// Using the object created in previous method, we will call "getPlace()" function (provided by google), to get 
-		// place details like geometry and place_id (Geometry means latitude and longitude).
-      var origin_place = autocomplete.getPlace();
-
-	  //We are using JSON 'stringify' function to convert the returned object into string for passing as text using the html form.
-      origin_place_string = JSON.stringify(origin_place.geometry)
-	  origin_place_id = JSON.stringify(origin_place.place_id)
-	//   origin_place_name = JSON.stringify(origin_place.name)
-
-	  var destination_place = autocomplete_2.getPlace();
-	  destination_place_string = JSON.stringify(destination_place.geometry)
-	  destination_place_id = JSON.stringify(destination_place.place_id)
-	//   destination_place_name = JSON.stringify(destination_place.name)
-
-	  // We will check if the user has selected an input from the dropdown or has typed something himself without selecting anything from the dropdown.
-	  // This can be checked if the location has a geometry.
-      if (!origin_place.geometry || !destination_place.geometry) {
-        document.getElementById('origin').placeholder = 'Enter a Place';
-		document.getElementById('destination').placeholder = 'Enter a Place';
-
-      } else {
-
-        // Setting Origin values to the hidden fields in the form.
-        document.getElementById('origin_coordinates').value = origin_place_string;
-		document.getElementById('origin_place_id').value = origin_place_id
-		document.getElementById("origin_name").value = origin_place.name
-
-		// Setting Destination Values to the hidden fields in the form.
-		document.getElementById('destination_coordinates').value = destination_place_string;
-		document.getElementById('destination_place_id').value = destination_place_id
-		document.getElementById('destination_name').value = destination_place.name
-
-		// Submitting form that has id="send_geometry" using the JavaScript "submit()" method.
-		// document.getElementById('send_location_info').submit();
-
-		map = new google.maps.Map(document.getElementById('map'), {
-				center: origin_place.geometry.location,
-				zoom: 19
-			})
-			new google.maps.Marker({
-				position: origin_place.geometry.location, map, title:"Hey"
-			})
-		
-      }
-
-    }
-	
-  </script>
-
+    {% block jsForMaps %}
+  	<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+	{% endblock %}
 <!-- js-scripts -->		
 
 	<!-- js -->
@@ -477,22 +414,13 @@
 	</script>
 	<!-- //here ends scrolling icon -->
 	<!-- start-smoth-scrolling -->
-	<!-- <script>
-		function initMap(name) {
-			coordinates = name
-			console.log("Hey")
-			console.log(coordinates)
-			
+	<script>
+		var preloader = document.getElementById('load')
 
+		function load_preloader(){
+			preloader.style.display = 'none';
 		}
-		google.maps.event.addDomListener(window, 'load', initMap);
-		
-	</script> -->
-	
-	<!-- <script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdQ3Jx0mPk6J9vNVdKN-tSDCM5eYk9abs&callback=initMap()">
-	
-	</script> -->
+	</script>
 	
 	
 <!-- //js-scripts -->
