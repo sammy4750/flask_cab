@@ -13,11 +13,17 @@ import json
 app = Flask(__name__)
 app.secret_key = "50cf8b9fd427ee793cb4bfb17af7f69e7e373d3d9095b1061da93552aca8eea3"
 app.config['USER_ENABLE_EMAIL'] = False
+<<<<<<< HEAD
+=======
+app.config['GOOGLEMAPS_KEY'] = "AIzaSyDdQ3Jx0mPk6J9vNVdKN-tSDCM5eYk9abs"
+# app.config['USER_ENABLE_AUTH0'] = False
+>>>>>>> c1b1e0c6478edabbaf88cc6d412c7bbdd9b219b0
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///users.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['GOOGLEMAPS_KEY'] = "AIzaSyDdQ3Jx0mPk6J9vNVdKN-tSDCM5eYk9abs" #Setting Google Maps API key
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
+# GoogleMaps(app)
 
 #Initializing the extension
 GoogleMaps(app)
@@ -339,6 +345,7 @@ def driver_updatepass(id):
             return redirect('/driver/editpass')
     return redirect('/driver/editpass')
 
+<<<<<<< HEAD
 @app.route('/user/booking', methods=['GET', 'POST'])
 @roles_required("Rider")
 @login_required
@@ -349,10 +356,39 @@ def bookride():
         
         return render_template('user/ridedetails.html')
     return render_template('user/bookride.html')
+=======
+# @app.route('/bookride', methods=['GET', 'POST'])
+# def bookride():
+#     if request.method == 'POST':
+#         # Collecting location data submitted by user
+#         origin_coordinates = request.form['origin_coordinates']
+#         destination_coordinates = request.form['destination_coordinates']
+#         origin_name = request.form['origin_name']
+
+#         origin_place_id = request.form['origin_place_id']
+#         destination_place_id = request.form['destination_place_id']
+#         destination_name = request.form['destination_name']
+
+#         # Converting string back into dictionary
+#         origin_coordinates_dict = json.loads(origin_coordinates)
+#         destination_coordinates_dict = json.loads(destination_coordinates)
+
+#         # Printing Data
+#         print("Origin co-ordinates are: " + origin_coordinates)
+#         print("Origin Place id is: " + origin_place_id)
+#         print("Origin Place name is: " + origin_name)
+        
+#         print("Destination co-ordinates are: " + destination_coordinates)
+#         print("Destination Place id is: " + destination_place_id)
+#         print("Destination Place name is: " + destination_name)
+#         return render_template('user/ridedetails.html', name=[origin_name,destination_name])
+#     return render_template('/user/bookride.html')
+>>>>>>> c1b1e0c6478edabbaf88cc6d412c7bbdd9b219b0
 
 @app.route('/ride')
 def ride():
     return render_template('/user/ridedetails.html')
+
 
 # Run Code
 if __name__=="__main__":

@@ -1,0 +1,101 @@
+{% extends 'user/master.html' %}
+
+    {% block content %}
+
+
+
+    <!-- Booking -->
+    <section class="bookingride">
+        <div class="row">
+            <div class="col-lg-3" style=" height: 810px;">
+                <div class="" style="width: 100%; height: 50%;">
+                    <div class="">
+                        <div id="accordion">
+                            <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <i class="fa fa-home" aria-hidden="true"></i>&nbsp &nbsp
+                                    Choose from a Saved Trip
+                                </button>
+                                </h5>
+                            </div>
+                        
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body text-dark">
+                                    <a href="">1. Home</a> 
+                                </div>
+                            </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp &nbsp
+                                    Enter new location
+                                    </button>
+                                </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body text-dark">
+                                    <h5 class="card-title">Enter Origin and Destination</h5>
+                                    <form id="send_location_info" class="mt-4" action="" method="POST">
+                                        <div class="form-group">
+                                        <input type="text" class="form-control" id="origin" placeholder="Origin">
+                                        </div>
+                                        <div class="form-group">
+                                        <input type="text" class="form-control" id="destination" placeholder="Destination">
+                                        </div>
+                                        
+                                        <input type="hidden" id="origin_lat" value="" name="origin_lat">
+                                        <input type="hidden" id="destination_lat" value="" name="destination_lat">
+                                        <input type="hidden" id='origin_lng' value="" name="origin_lng">
+                                        <input type="hidden" id="destination_lng" value="" name="destination_lng">
+                                    </form>
+                                    <div class="form-group">
+                                        <button onclick="getDirections()" type="text" class=" form-control btn btn-warning text-white btn-sm"><b>Confirm</b></button>
+                                    </div>
+                                    <br><br>
+                                    <h6 class="display-5">Enter Complete Address</h6>
+                                    
+                                    <form id="send_address" class="mt-4" action="" method="POST">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="floor" placeholder="HOUSE / FLAT / BLOCK NO.">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="floor" placeholder="APARTMENT / COMPLEX NAME">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="floor" placeholder="LANDMARK">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="floor" placeholder="ZIPCODE">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="floor" placeholder="DIRECTIONS TO REACH">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    <br><br>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+				<br>
+			    <div class="row">
+                    <!-- <h6 style="padding-left: 20px;">Distance and Duration</h6> -->
+				  <div class="col-lg-12" style="padding-right: 40px;"> 
+                    <div id="map" style="height: 700px;">
+
+                    </div> 
+				  </div>
+			    </div>
+			</div>
+        </div>
+    </section>
+    
+    {% endblock %}
