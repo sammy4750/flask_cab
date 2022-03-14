@@ -14,16 +14,16 @@
 		}
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- done extra -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> <!-- done -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- done -->
-    <script src="http://lab.mattvarone.com/projects/jquery/totop/js/jquery.ui.totop.js"></script>   <!-- done -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="http://lab.mattvarone.com/projects/jquery/totop/js/jquery.ui.totop.js"></script>  
 
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- done -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/dropdown_style.css') }}"> <!-- done -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.css') }}"> <!-- done -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.css') }}">    <!-- done -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/wickedpicker.css') }}">   <!-- done -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dropdown_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.css') }}">   
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/wickedpicker.css') }}">  
     <!-- <link rel="stylesheet" href="css/fontawesome-all.css"> -->
 
     <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext" rel="stylesheet">
@@ -39,18 +39,18 @@
         <div class="navbar-collapse" id="navbarSupportedContent">
             <div class="navbar-nav mx-auto mb-2 mb-lg-0 logo">
                 <a class="navbar-brand" href="/">
-                    <i class="fa fa-taxi" style="color: #ffc107;"></i><b style="color: #343a40;">CAMMY CAB</b></a>
+                    <i class="fa fa-taxi" style="color: #ffc107;"></i><b style="color: #343a40;"> CAMMY CAB</b></a>
             </div>
             <div class="d-flex">
                 {% if current_user.is_authenticated %}
-                    <div class="nav-item dropdown custom-dropdown mx-auto" style="margin-right: 70px; background-color: #ffc107; border-radius: 5px;">
-                        <a class="nav-link dropdown-toggle login-borders text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-lock" style="font-size:17px;"></i>&nbsp
+                    <div class="nav-item dropdown custom-dropdown mx-auto" style="border: 1px solid ;margin-right: 70px; border-radius: 5px;">
+                        <a class="nav-link dropdown-toggle login-borders" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-user" style="font-size:17px;"></i>&nbsp
                             <b> Welcome, {{current_user.fname}}</b>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/driver/editprofile">
-                                <i class="fa fa-user" style="font-size:17px;"></i>&nbsp
+                                <i class="fa fa-edit" style="font-size:17px;"></i>&nbsp
                                 <span>Edit Profile</span> </a>
                                 <a class="dropdown-item" href="/driver/logout">
                                 <i class="fa fa-sign-out" style="font-size:14px"></i>&nbsp
@@ -58,10 +58,11 @@
                             </ul>
                     </div> &nbsp  &nbsp
                 {% else %}
+                <div class="d-flex mx-auto">
                     <!-- Dropdown 1 -->
-                    <div class="nav-item dropdown custom-dropdown mx-auto" style="margin-right: 70px;">
+                    <div class="nav-item dropdown custom-dropdown mx-auto" >
                         <a class="nav-link dropdown-toggle login-borders" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-lock" style="font-size:17px;"></i>&nbsp
+                            <i class="fa fa-sign-in" style="font-size:17px;"></i>&nbsp
                             Sign in
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -74,7 +75,7 @@
                             </ul>
                     </div> &nbsp  &nbsp
                     <!-- Dropdown 2 -->
-                    <div class="nav-item dropdown custom-dropdown" style="margin-right: 70px;">
+                    <div class="nav-item dropdown custom-dropdown" >
                         <a class="nav-link dropdown-toggle login-borders" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-user"></i>&nbsp
                             Register
@@ -88,6 +89,7 @@
                             <span>As Driver</span> </a>
                         </div>
                     </div>
+                </div>
                 {% endif %}
                 
             </div>
@@ -106,11 +108,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent3" >
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link ml-lg-0" href="/">Home
+                    <a class="nav-link ml-lg-0" href="/driver/home">Home
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/booking">Booking</a>
+                    	<a class="nav-link" href="/user/booking">Booking</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/user/contact">Contact</a>
@@ -146,7 +148,7 @@
 				<h3 class="mb-sm-5 mb-4">Locate Us</h3>	
 				<ul class="w3ls-footer-bottom-list">
 					<li> <span class="fa fa-map-marker"></span> 402, Shakti-Suman Flats, Gujarat, India </li>
-					<li> <span class="fa fa-envelope"></span> <a href="mailto:info@cammy.com"> info@cammy.com</a> </li>
+					<li> <span class="fa fa-envelope"></span>  info@cammy.com </li>
 					<li> <span class="fa fa-phone"></span> (+91)8488886344 </li>
 					<!-- <li> <span class="fa fa-globe"></span> <a href="#"> www.cammy.com</a> </li>
 					<li> <span class="fa fa-clock"></span> Office Time  : 8:00 a.m - 6:00 p.m</li> -->
@@ -207,6 +209,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
+
 <!-- carousel -->
 <script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
 <script>
@@ -238,6 +241,50 @@
         })
     })
 </script>
+
+	<!-- js -->
+	<!-- <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>  -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<!-- //js -->
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdQ3Jx0mPk6J9vNVdKN-tSDCM5eYk9abs&libraries=places"></script>
+  	<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+	
+	<!-- carousel -->
+	<script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
+	<script>
+		$(document).ready(function () {
+			$('.owl-carousel').owlCarousel({
+				loop: true,
+				margin: 10,
+				responsiveClass: true,
+				responsive: {
+					0: {
+						items: 1,
+						nav: true
+					},
+					600: {
+						items: 1,
+						nav: false
+					},
+					900: {
+						items: 2,
+						nav: false
+					},
+					1000: {
+						items: 3,
+						nav: true,
+						loop: false,
+						margin: 20
+					}
+				}
+			})
+		})
+	</script>
+
 	<!-- //carousel -->
 
 	<!-- start-smoth-scrolling -->

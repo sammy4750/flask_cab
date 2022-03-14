@@ -252,11 +252,6 @@ function getDirections() {
                         var box = document.createElement('div');
                         box.style.backgroundColor = '#ffffff';
                         box.style.opacity = '0.8';
-
-                        // var temp = document.createElement('h6');
-                        // temp.innerHTML = "Distance and Duration: " + distance + " and " + duration;
-                        // box.appendChild(temp);
-                        // map.controls[google.maps.ControlPosition.TOP_LEFT].push(box);
                         
                         var mydistance = document.createElement('h6');
                         mydistance.innerHTML = 'Distance: ' + distance;
@@ -266,10 +261,7 @@ function getDirections() {
                         box.appendChild(mydistance);
                         box.appendChild(myduration);
                         map.controls[google.maps.ControlPosition.TOP_LEFT].push(box);
-                        // map.controls[google.maps.ControlPosition.TOP_LEFT].push(box);
 
-                        // window.alert(distance);
-                        // window,alert(duration);
                     } else {
                         window.alert(status)
                     }

@@ -334,7 +334,7 @@ def driver_updatepass(id):
                 email = current_user.driver_email
                 data = Driver.query.filter_by(driver_email=email).first()
                 login_user(data)
-                return redirect("/driver/editpass")
+                return redirect("/driver/home")
             else:
                 flash('Confirm Password is not same as the Password')
                 return redirect("/driver/editpass")

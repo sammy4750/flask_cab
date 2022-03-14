@@ -45,12 +45,12 @@
                 {% if current_user.is_authenticated %}
                     <div class="nav-item dropdown custom-dropdown mx-auto" style="border: 1px solid ;margin-right: 70px; border-radius: 5px;">
                         <a class="nav-link dropdown-toggle login-borders" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-lock" style="font-size:17px;"></i>&nbsp
+                            <i class="fa fa-user" style="font-size:17px;"></i>&nbsp
                             <b> Welcome, {{current_user.fname}}</b>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/user/editprofile">
-                                <i class="fa fa-user" style="font-size:17px;"></i>&nbsp
+                                <i class="fa fa-edit" style="font-size:17px;"></i>&nbsp
                                 <span>Edit Profile</span> </a>
                                 <a class="dropdown-item" href="/user/logout">
                                 <i class="fa fa-sign-out" style="font-size:14px"></i>&nbsp
@@ -62,7 +62,7 @@
                     <!-- Dropdown 1 -->
                     <div class="nav-item dropdown custom-dropdown mx-auto" >
                         <a class="nav-link dropdown-toggle login-borders" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-lock" style="font-size:17px;"></i>&nbsp
+                            <i class="fa fa-sign-in" style="font-size:17px;"></i>&nbsp
                             Sign in
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -112,7 +112,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/booking">Booking</a>
+                    	<a class="nav-link" href="/user/booking">Booking</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/user/contact">Contact</a>
