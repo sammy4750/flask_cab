@@ -13,11 +13,9 @@ import json
 app = Flask(__name__)
 app.secret_key = "50cf8b9fd427ee793cb4bfb17af7f69e7e373d3d9095b1061da93552aca8eea3"
 app.config['USER_ENABLE_EMAIL'] = False
-<<<<<<< HEAD
-=======
+
 app.config['GOOGLEMAPS_KEY'] = "AIzaSyDdQ3Jx0mPk6J9vNVdKN-tSDCM5eYk9abs"
 # app.config['USER_ENABLE_AUTH0'] = False
->>>>>>> c1b1e0c6478edabbaf88cc6d412c7bbdd9b219b0
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///users.db"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['GOOGLEMAPS_KEY'] = "AIzaSyDdQ3Jx0mPk6J9vNVdKN-tSDCM5eYk9abs" #Setting Google Maps API key
@@ -345,7 +343,6 @@ def driver_updatepass(id):
             return redirect('/driver/editpass')
     return redirect('/driver/editpass')
 
-<<<<<<< HEAD
 @app.route('/user/booking', methods=['GET', 'POST'])
 @roles_required("Rider")
 @login_required
@@ -355,8 +352,8 @@ def bookride():
         # Write code here to store the data
         
         return render_template('user/ridedetails.html')
-    return render_template('user/bookride.html')
-=======
+    return render_template('user/booking.html')
+
 # @app.route('/bookride', methods=['GET', 'POST'])
 # def bookride():
 #     if request.method == 'POST':
@@ -383,7 +380,7 @@ def bookride():
 #         print("Destination Place name is: " + destination_name)
 #         return render_template('user/ridedetails.html', name=[origin_name,destination_name])
 #     return render_template('/user/bookride.html')
->>>>>>> c1b1e0c6478edabbaf88cc6d412c7bbdd9b219b0
+
 
 @app.route('/ride')
 def ride():

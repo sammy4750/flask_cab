@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-{% extends 'user/master.html' %}
+<!-- {% extends 'user/master.html' %}
 	{% block header %}
 	<div style="height: 90px; background-color: #252525;">
 	</div>
@@ -31,8 +30,8 @@
 								</button>
 							  </h2>
 							  <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-								<div class="accordion-body text-dark">
-=======
+								<div class="accordion-body text-dark"> -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -218,44 +217,11 @@
 								</div>
 								<div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
 								  <div class="card-body text-dark">
->>>>>>> c1b1e0c6478edabbaf88cc6d412c7bbdd9b219b0
 									<h5 class="card-title">Enter Origin and Destination</h5>
 									<form id="send_location_info" class="mt-4" action="" method="POST">
 										<div class="form-group">
 										<!-- Assigning value to the input field using the object sent from the view definition -->
 										<input required type="text" class="form-control" value="{% if name %} {{name[0]}} {% endif %}" id="origin" placeholder="Origin">
-<<<<<<< HEAD
-										</div><br>
-										<div class="form-group">
-										<!-- Assigning value to the input field using the object sent from the view definition -->
-										<input required type="text" class="form-control" value="{% if name %} {{name[1]}} {% endif %}" id="destination" placeholder="Destination">
-										</div><br>
-										<!-- The type of input field is set to "hidden" because they are used only for sending data to backend using JavaScript-->
-										<input type="hidden" id="origin_lat" name="origin_lat" value="">
-										<input type="hidden" id="origin_lng" name="origin_lat" value="">
-										<input type="hidden" id="destination_lat" name="origin_lat" value="">
-										<input type="hidden" id="destination_lng" name="origin_lat" value="">
-										<!-- <input type="text" name="test" id="test" value=""> -->
-											<!--  -->
- 									</form>
-									 <div class="form-group">
-										<button  onclick="getDirections()" type="text" class=" form-control btn btn-warning text-white btn-sm"><b>Confirm</b></button>
-									</div>
-									<form id="send_address" class="mt-4" action="" method="POST">
-										<p>Enter Your Complete Address</hp><br> <br>
-										<div class="form-group">
-											<input required type="text" class="form-control" id="floor" placeholder="HOUSE / FLAT / BLOCK NO.">
-										</div><br>
-										<div class="form-group">
-											<input required type="text" class="form-control" id="floor" placeholder="APARTMENT / COMPLEX NAME">
-										</div><br>
-										<div class="form-group">
-											<input required type="text" class="form-control" id="floor" placeholder="LANDMARK">
-										</div><br>
-										<div class="form-group">
-											<input required type="text" class="form-control" id="floor" placeholder="ZIPCODE">
-										</div><br>
-=======
 										</div>
 										<div class="form-group">
 										<!-- Assigning value to the input field using the object sent from the view definition -->
@@ -288,7 +254,6 @@
 										<div class="form-group">
 											<input required type="text" class="form-control" id="floor" placeholder="ZIPCODE">
 										</div>
->>>>>>> c1b1e0c6478edabbaf88cc6d412c7bbdd9b219b0
 										<div class="form-group">
 											<button type="submit" class=" form-control btn btn-primary text-white"><b>Click to View Rides</b></button>
 										</div>
@@ -301,21 +266,6 @@
 						
 					</div>
 			</div>
-<<<<<<< HEAD
-			<div class="col-lg-9" style="padding-left: 0; margin-top: 2px;">
-				<!-- <h2 class="border rounded text-center" style="padding: 20px;margin-top: 0px;">
-					<i class="fa fa-cab" style="float: left;" aria-hidden="true"></i>
-					<solid style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">RIDE DETAILS</solid> </h2>
-				  <br> -->
-			   <div class="row justify-content-center">
-				  <div class="col-lg-12">
-					 <div class="border rounded" id ="map" style="height: 800px;">
-
-					  </div>
-				  </div>
-			   </div>
-			 </div>
-=======
 			{% block content %}
 			<div class="col-lg-9">
 				<h2 class="border border-warning rounded mt-1 bg-dark text-white text-center" style="padding: 20px;">Ride Details 
@@ -331,21 +281,15 @@
 			   </div>
 			 </div>
 			{% endblock %}
->>>>>>> c1b1e0c6478edabbaf88cc6d412c7bbdd9b219b0
 		</div>
 	</div>
     
 	<!-- Google Maps Javascript API to get suggestions and collect location from user. -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdQ3Jx0mPk6J9vNVdKN-tSDCM5eYk9abs&libraries=places"></script>
-<<<<<<< HEAD
-  	<script src="{{ url_for('static', filename='js/map.js') }}"></script>
-	<!-- js-scripts -->		
-	{% endblock %}
-=======
     <!-- {% block jsForMaps %} -->
   	<script src="{{ url_for('static', filename='js/map.js') }}"></script>
 	<!-- {% endblock %} -->
-<!-- js-scripts -->		
+	<!-- js-scripts -->		
 
 	<!-- js -->
 	<!-- <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-2.1.4.min.js') }}"></script>
@@ -445,4 +389,3 @@
 	
 <!-- //js-scripts -->
     </html>
->>>>>>> c1b1e0c6478edabbaf88cc6d412c7bbdd9b219b0
