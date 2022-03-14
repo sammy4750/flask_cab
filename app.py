@@ -347,11 +347,11 @@ def driver_updatepass(id):
 @roles_required("Rider")
 @login_required
 def bookride():
-    if request.method == 'POST':
+    # if request.method == 'POST':
 
-        # Write code here to store the data
+    #     # Write code here to store the data
         
-        return render_template('user/ridedetails.html')
+    #     return render_template('user/ridedetails.html')
     return render_template('user/booking.html')
 
 # @app.route('/bookride', methods=['GET', 'POST'])
