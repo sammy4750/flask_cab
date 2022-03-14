@@ -1,6 +1,9 @@
 {% extends 'user/master.html' %}
+    {% block header %}
+    <div style="height: 90px; background-color: #252525;"></div>
+    {% endblock %}
+    
     {% block content %}
-
     <section class="bookingform py-5">
         <div class="container py-md-5 py-3">
             {% with messages = get_flashed_messages() %}
@@ -23,7 +26,7 @@
             <h1 class="heading text-capitalize text-center">Sign In to your account</h1>
             <h5 class="heading mb-5 text-center">Cammy Cab</h5>
             <div class="row justify-content-center" role="document">
-                <div class="col-lg-6">
+                <div class="col-lg-5">
                     <div class="modal-header text-center">
                         <h5 class="w-100">Please Enter Your Credentials</h5>
                     </div>

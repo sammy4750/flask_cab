@@ -1,5 +1,4 @@
 import email
-from tkinter import CENTER
 from unicodedata import name
 from flask import Flask, render_template, request, redirect, flash
 from flask_migrate import Migrate
@@ -22,9 +21,6 @@ migrate = Migrate(app,db)
 
 #Initializing the extension
 GoogleMaps(app)
-
-# you can also pass the key here if you prefer
-# GoogleMaps(app, key="8JZ7i18MjFuM35dJHq70n3Hx4")
 
 #flask_login Stuff:
 
@@ -85,7 +81,7 @@ class Role(db.Model):
     name = db.Column(db.String(50))
 
 # Define the UserRoles association table
-class UserRoles(db.Model):
+class UserRoles(User, db.Model):
     __tablename__ = 'user_roles'
     id = db.Column(db.Integer(), primary_key=True)
     user_id = db.Column(db.Integer(), ForeignKey('user.id', ondelete='CASCADE'))
@@ -95,12 +91,6 @@ class UserRoles(db.Model):
 @app.route('/')
 def user_index():
     return render_template("/user/index.html")
-
-# @app.route('/user/booking')
-# @roles_required("Rider")
-# @login_required
-# def booking():
-#     return render_template("/user/booking.html")
 
 @app.route('/user/contact')
 def contact():
@@ -132,7 +122,7 @@ def user_register():
 
         if password==cpassword:
             registration = Rider(fname=fname,lname=lname,rider_email=email,rider_contact=contact,password=generate_password_hash(password,method='sha256'))
-            registration.roles=[Role(name='Rider')]
+            registration.roles=[Role.query.filter_by(id="1").first()]
             db.session.add(registration)
             db.session.commit()
             login_user(registration) #remember=True
@@ -254,7 +244,7 @@ def driver_register():
 
         if password==cpassword:
             registration = Driver(fname=fname,lname=lname,driver_email=email,driver_contact=contact,file_name=file.filename,original_file=file.read(),password=generate_password_hash(password,method='sha256'))
-            registration.roles=[Role(name='Driver')]
+            registration.roles=[Role.query.filter_by(id="2").first()]
             db.session.add(registration)
             db.session.commit()
             login_user(registration) # remember=True
@@ -354,31 +344,10 @@ def driver_updatepass(id):
 @login_required
 def bookride():
     if request.method == 'POST':
-        # Collecting location data submitted by user
-        origin_coordinates = request.form['origin_coordinates']
-        destination_coordinates = request.form['destination_coordinates']
-        origin_name = request.form['origin_name']
 
-        origin_place_id = request.form['origin_place_id']
-        destination_place_id = request.form['destination_place_id']
-        destination_name = request.form['destination_name']
-
-        # Converting string back into dictionary
-        # origin_coordinates_dict = json.loads(origin_coordinates)
-        # destination_coordinates_dict = json.loads(destination_coordinates)
-
-        # Printing Data
-        print("Origin co-ordinates are: " + origin_coordinates)
-        print("origin coordinates dict is: ")
-        # print(origin_coordinates_dict)
-        print("Origin Place id is: " + origin_place_id)
-        print("Origin Place name is: " + origin_name)
+        # Write code here to store the data
         
-        print("Destination co-ordinates are: " + destination_coordinates)
-        print("Destination Place id is: " + destination_place_id)
-        print("Destination Place name is: " + destination_name)
-
-        return render_template('user/ridedetails.html', name=[origin_name,destination_name])
+        return render_template('user/ridedetails.html')
     return render_template('user/bookride.html')
 
 @app.route('/ride')

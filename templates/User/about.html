@@ -1,5 +1,8 @@
 {% extends 'user/master.html' %}
 
+    {% block header %}
+    <div style="height: 90px; background-color: #252525;"></div>
+    {% endblock %}
     {% block content %}
     <!-- about -->
     <section class="services py-5">
@@ -12,21 +15,21 @@
                     <p class="mb-3">Starting from a small <b>hatchback to the Mercedes</b>, we got everything covered for your amazing cab booking experience. With fares starting from as low as <b>Rs. 8/km</b>, it won't shake your budget too.</p>
                 </div>
                 <div class="col-lg-2 col-6">
-                    <img src="images/1.png" alt="" class="img-fluid" />
-                    <img src="images/2.png" alt="" class="img-fluid" />
-                    <img src="images/3.png" alt="" class="img-fluid" />
+                    <img src="{{ url_for('static', filename='images/1.png') }}" alt="" class="img-fluid" />
+                    <img src="{{ url_for('static', filename='images/2.png') }}" alt="" class="img-fluid" />
+                    <img src="{{ url_for('static', filename='images/3.png') }}" alt="" class="img-fluid" />
                 </div>
                 <div class="col-lg-2 col-6">
-                    <img src="images/3.png" alt="" class="img-fluid" />
-                    <img src="images/1.png" alt="" class="img-fluid" />
-                    <img src="images/2.png" alt="" class="img-fluid" />
+                    <img src="{{ url_for('static', filename='images/3.png') }}" alt="" class="img-fluid" />
+                    <img src="{{ url_for('static', filename='images/1.png') }}" alt="" class="img-fluid" />
+                    <img src="{{ url_for('static', filename='images/2.png') }}" alt="" class="img-fluid" />
                 </div>
                 <div class="col-lg-4">
-                    <h4 class="text-capitalize"><i class="fas fa-taxi clr1"></i>Luxury Cars</h4>
+                    <h4 class="text-capitalize"><i class="fa fa-taxi clr1"></i>Luxury Cars</h4>
                     <p class="mb-4"> From Mercedes to BMW. </p>
-                    <h4 class="text-capitalize"><i class="fas fa-bus clr2"></i>Hatchback cars</h4>
+                    <h4 class="text-capitalize"><i class="fa fa-bus clr2"></i>Hatchback cars</h4>
                     <p class="mb-4"> Perfect for your small trips.</p>
-                    <h4 class="text-capitalize"><i class="fas fa-car clr3"></i>SUV for your family trips.</h4>
+                    <h4 class="text-capitalize"><i class="fa fa-car clr3"></i>SUV for your family trips.</h4>
                     <p class="mb-4"> 7-seater for your group trip.</p>
                 </div>
             </div>

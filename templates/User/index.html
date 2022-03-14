@@ -1,289 +1,276 @@
 {% extends 'user/master.html' %}
 
-	{% block header %}
-	
-	<div id="wrapper">
+    {% block header %}
+    <!-- Carousel -->
+    <div id="demo" class="carousel slide" data-bs-ride="carousel" style="width: 100%;
+    height: 100%; overflow-x: hidden; ">
 
-		<!-- Slideshow 1 -->
-		<div class="rslides_container">
-			<ul class="rslides" id="slider1">
-				<li>
-					<div class="banner-img">
-						<div class="bs-slider-overlay">
-							<div class="banner-info text-center">
-								<span class="fas fa-taxi"></span>
-								<h1>24/7 Cab Service </h1>
-								<!-- <h2 class="mb-5"><i class="fas fa-phone"></i> (+91) 8488886344</h2> -->
-								<br><br><br>
-								<a href="/user/booking">Book Now </a>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="banner-img one">
-						<div class="bs-slider-overlay">
-							<div class="banner-info text-center">
-								<span class="fas fa-taxi"></span>
-								<h4>Online Cab Booking</h4>
-								<h5 class="mb-5">No Extra Charges</h5>
-								<a href="/user/booking">Book Now </a>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="banner-img two">
-						<div class="bs-slider-overlay">
-							<div class="banner-info text-center">
-								<span class="fas fa-taxi"></span>
-								<h4>Reach Your Destination</h4>
-								<h5 class="mb-5">Within Exact Time </h5>
-								<a href="/user/booking">Book Now </a>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="banner-img three">
-						<div class="bs-slider-overlay">
-							<div class="banner-info text-center">
-								<span class="fas fa-taxi"></span>
-								<h4>Travel Safe & Secure</h4>
-								<h5 class="mb-5">Assured Cab Service</h5>
-								<a href="/user/booking">Book Now </a>
-							</div>
-						</div>
-					</div>
-				</li>
+        <!-- Indicators/dots -->
+        <div class="carousel-indicators">
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        </div>
+        
+        <!-- The slideshow/carousel -->
+        <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img class="carousel-image-length" src="{{ url_for('static', filename='images/banner1.jpg') }}" alt="Los Angeles" class="d-block" style="width:100%">
+            <div class="bs-slider-overlay"></div>
+            <div class="carousel-caption-modified center">
+                <i class="fa fa-cab" style="font-size: 50px;" aria-hidden="true"></i><br><br>
+                <h1 style="font-size: 60px; font-family: 'Times New Roman', Times, serif;">24/7 Cab Service</h1>
+                <br><br><br>
+                <a class="" href="/user/booking">Book Now</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="carousel-image-length" src="{{ url_for('static', filename='images/banner4.jpg') }}" alt="Chicago" class="d-block" style="width:100%">
+            <div class="bs-slider-overlay"></div>
+            <div class="carousel-caption-modified center">
+                <i class="fa fa-dollar" style="font-size: 50px;" aria-hidden="true"></i><br><br>
+                <h1 style="font-size: 60px; font-family: 'Times New Roman', Times, serif;">Affordable Fares</h1>
+                <br><br><br>
+                <a class="" href="/user/booking">Book Now</a>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img class="carousel-image-length" src="{{ url_for('static', filename='images/banner3.jpg') }}" alt="New York" class="d-block" style="width:100%">
+            <div class="bs-slider-overlay"></div>
+            <div class="carousel-caption-modified center">
+                <i class="fa fa-user" style="font-size: 50px;" aria-hidden="true"></i><br><br>
+                <h1 style="font-size: 60px; font-family: 'Times New Roman', Times, serif;">Customer Support</h1>
+                <br><br><br>
+                <a class="" href="/user/booking">Book Now</a>
+            </div>
+        </div>
+        </div>
+        
+        <!-- Left and right controls/icons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+    <!-- /Carousel -->
+    {% endblock %}
 
-			</ul>
-		</div>
-	</div>
+    {% block content %}
+        <!-- about -->
+        <section class="about py-5">
+            <div class="container py-lg-5 py-3" style="transform: scale(0.85);">
+                <h3 class="heading text-capitalize text-center">Welcome</h3>
+                <h5 class="heading mb-5 text-center">to Cammy Cab</h5>
+                <div class="about-head text-center ">
+                    <div class="row about-grids-top mb-5">
+                        <div class="col-lg-2 col-sm-4 col-6 about-grid p-0">
+                            <i class="fa fa-dollar" aria-hidden="true"></i>
+                            <h4>Low Charges</h4>
+                        </div>
+                        <div class="col-lg-2 col-sm-4 col-6 about-grid p-0">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <h4>Safe & Secure</h4>
+                        </div>
+                        <div class="col-lg-2 col-sm-4 col-6 mt-sm-0 mt-5 about-grid p-0">
+                            <i class="fa fa-road" aria-hidden="true"></i>
+                            <h4>Traffic Roads</h4>
+                        </div>
+                        <div class="col-lg-2 col-sm-4 col-6 mt-lg-0 mt-5 about-grid p-0">
+                            <i class="fa fa-taxi" aria-hidden="true"></i>
+                            <h4>Taxi Cabs</h4>
+                        </div>
+                        <div class="col-lg-2 col-sm-4 col-6 mt-lg-0 mt-5 about-grid p-0">
+                            <i class="fa fa-cogs" aria-hidden="true"></i>
+                            <h4>24/7 Service</h4>
+                        </div>
+                        <div class="col-lg-2 col-sm-4 col-6 mt-lg-0 mt-5 about-grid p-0">
+                            <i class="fa fa-smile-o" aria-hidden="true"></i>
+                            <h4>Customers</h4>
+                        </div>
+                    </div>
+                    <div class="row about-grids-bottom text-left">
+                        <div class="col-md-4 mb-md-0 mb-5 about-bottom-grid">
+                            <h4 class="mb-4">Welcome to Cammy Cab Services. Click on the button below to know more about us</h4>
+                            <a style="float: left;" href="/user/about"> More About Us</a>	
+                        </div>
+                        <div class="col-md-4 about-bottom-grid">
+                            <p>The most loved part of our service is the <b>Low fares</b> that we offer. When compared with our competitors, we provide cab service at a minimal rates starting from <b>Rs.8/km*</b></p>
+                        </div>
+                        <div class="col-md-4 about-bottom-grid">
+                            <p>One other positive point of the Cammy Cab is great customer support and quick resolutions for all queries and complaints. We promise to resolve all the complaints within a short period of 24 hours.</p>
+                        </div>
+                    </div>
+                </div>
+                        
+            </div>
+        </section>
+        <!-- //about -->
 
-	{% endblock %}
+        <!-- Our prices -->
+        <section class="prices py-5">
+            <div class="container py-lg-5 py-3" style="transform: scale(0.85);">
+                <h3 class="heading text-capitalize text-center">Our Pricing</h3>
+                <h5 class="heading mb-5 text-center">Cammy Cab</h5>
+                <div class="row pricing-grids">
+                    <div class="col-lg-3 col-md-6 price-grid">
+                        <div style="height: 90%;">
+                            <h3 class="mb-4">Micro Taxi -- <br> <span class="">Rs.8/km*</span></h3><br>
+                            <h4 class="my-3">Small fares for short rides</h4>
+                            <p> Yes!! Comfort and savings are possible together. Book a micro taxi starting at a minimal rate of Rs.8/km</p>
+                        </div><br>
+                        <div style="height: 10%;">
+                            <p style="border-top: 3px solid #bbb;"></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mt-md-0 mt-5 price-grid">
+                        <div style="height: 90%;">
+                            <h3 class="mb-4">Mini Taxi -- <br> <span class="">Rs.11/km*</span></h3><br>
+                            <h4 class="my-3">Small fares for medium rides. Too</h4>
+                            <p> Try our mini taxi and enjoy your medium journey without putting a burden on your wallet. Fare starts from Rs.11/km</p>
+                        </div><br>
+                        <div style="height: 10%;">
+                            <p style="border-top: 3px solid #bbb;"></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mt-lg-0 mt-5 price-grid">
+                        <div style="height: 90%;">
+                            <h3 class="mb-4">Prime Taxi -- <br> <span class="">Rs.20/km*</span></h3><br>
+                            <h4 class="my-3">Spend more. Get more</h4>
+                            <p> Book a Prime Taxi and feel like its your own car. Get additional advantages like a complimentary drink and much more while you ride.</p>
+                        </div><br>
+                        <div style="height: 10%;">
+                            <p style="border-top: 3px solid #bbb;"></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mt-lg-0 mt-5 price-grid">
+                        <div style="height: 90%;">
+                            <h3 class="mb-4">Sedan Taxi -- <br> <span class="">Rs.30/km*</span></h3><br>
+                            <h4 class="my-3">The title suggests itself</h4>
+                            <p> At very affordable rates, reach your destination in  premium cars from brands like Mercedes and Audi.</p>
+                        </div><br>
+                        <div style="height: 10%;">
+                            <p style="border-top: 3px solid #bbb;"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- //Our prices -->
 
-	{% block content %}
-
-	
-	<!-- about -->
-	<section class="about py-5">
-		<div class="container py-lg-5 py-3">
-			<h3 class="heading text-capitalize text-center">Welcome</h3>
-			<h5 class="heading mb-5 text-center">Cammy Cab</h5>
-			<div class="about-head text-center ">
-				<div class="row about-grids-top mb-5">
-					<div class="col-lg-2 col-sm-4 col-6 about-grid p-0">
-						<i class="fas fa-money-bill-alt" aria-hidden="true"></i>
-						<h4>Low Charges</h4>
-					</div>
-					<div class="col-lg-2 col-sm-4 col-6 about-grid p-0">
-						<i class="fa fa-users" aria-hidden="true"></i>
-						<h4>Safe & Secure</h4>
-					</div>
-					<div class="col-lg-2 col-sm-4 col-6 mt-sm-0 mt-5 about-grid p-0">
-						<i class="fa fa-road" aria-hidden="true"></i>
-						<h4>Traffic Roads</h4>
-					</div>
-					<div class="col-lg-2 col-sm-4 col-6 mt-lg-0 mt-5 about-grid p-0">
-						<i class="fa fa-taxi" aria-hidden="true"></i>
-						<h4>Taxi Cabs</h4>
-					</div>
-					<div class="col-lg-2 col-sm-4 col-6 mt-lg-0 mt-5 about-grid p-0">
-						<i class="fa fa-cogs" aria-hidden="true"></i>
-						<h4>24/7 Service</h4>
-					</div>
-					<div class="col-lg-2 col-sm-4 col-6 mt-lg-0 mt-5 about-grid p-0">
-						<i class="fa fa-smile" aria-hidden="true"></i>
-						<h4>Customers</h4>
-					</div>
-				</div>
-				<div class="row about-grids-bottom text-left">
-					<div class="col-md-4 mb-md-0 mb-5 about-bottom-grid">
-						<h4 class="mb-4">Welcome to Cammy Cab Services. Click on the button below to know more about us</h4>
-						<a href="/user/about"> More About Us</a>	
-					</div>
-					<div class="col-md-4 about-bottom-grid">
-						<p>The most loved part of our service is the <b>Low fares</b> that we offer. When compared with our competitors, we provide cab service at a minimal rates starting from <b>Rs.8/km*</b></p>
-					</div>
-					<div class="col-md-4 about-bottom-grid">
-						<p>One other positive point of the Cammy Cab is great customer support and quick resolutions for all queries and complaints. We promise to resolve all the complaints within a short period of 24 hours.</p>
-					</div>
-				</div>
-			</div>
-					
-		</div>
-	</section>
-	<!-- //about -->
-
-
-	<!-- Our prices -->
-	<section class="prices py-5">
-		<div class="container py-lg-5 py-3">
-			<h3 class="heading text-capitalize text-center">Our Pricing</h3>
-			<h5 class="heading mb-5 text-center">Cammy Cab</h5>
-			<div class="row pricing-grids">
-				<div class="col-lg-3 col-md-6 price-grid">
-					<h3 class="mb-4">Micro Taxi -- <span class="">Rs.8/km*</span></h3>
-					<h4 class="my-3">Small fares for short rides</h4>
-					<p> Yes!! Comfort and savings are possible together. Book a micro taxi starting at a minimal rate of Rs.8/km</p>
-					<p style="border-top: 3px solid #bbb;"></p>
-					<!-- <ul class="d-flex mt-3">
-						<li class="mr-3">2 <i class="fas fa-male" aria-hidden="true"></i></li>
-						<li class="mr-3">1 <i class="fas fa-suitcase" aria-hidden="true"></i></li>
-					</ul> -->
-				</div>
-				<div class="col-lg-3 col-md-6 mt-md-0 mt-5 price-grid">
-					<h3 class="mb-4">Mini Taxi -- <span class="">Rs.11/km*</span></h3>
-					<h4 class="my-3">Small fares for medium rides. Too</h4>
-					<p> Try our mini taxi and enjoy your medium journey without putting a burden on your wallet. Fare starts from Rs.11/km</p>
-					<p style="border-top: 3px solid #bbb;"></p>
-					<!-- <ul class="d-flex mt-3">
-						<li class="mr-3">2 <i class="fas fa-male" aria-hidden="true"></i></li>
-						<li class="mr-3">2 <i class="fas fa-suitcase" aria-hidden="true"></i></li>
-						<li class="mr-3">1 <i class="fas fa-wifi" aria-hidden="true"></i></li>
-					</ul> -->
-				</div>
-				<div class="col-lg-3 col-md-6 mt-lg-0 mt-5 price-grid">
-					<h3 class="mb-4">Prime Taxi -- <span class="">Rs.20/km*</span></h3>
-					<h4 class="my-3">Spend more. Get more</h4>
-					<p> Book a Prime Taxi and feel like its your own car. Get additional advantages like a complimentary drink and much more while you ride.</p>
-					<p style="border-top: 3px solid #bbb;"></p>
-					<!-- <ul class="d-flex mt-3">
-						<li class="mr-3">3 <i class="fas fa-male" aria-hidden="true"></i></li>
-						<li class="mr-3">2 <i class="fas fa-suitcase" aria-hidden="true"></i></li>
-						<li class="mr-3">1 <i class="fas fa-wifi" aria-hidden="true"></i></li>
-					</ul> -->
-				</div>
-				<div class="col-lg-3 col-md-6 mt-lg-0 mt-5 price-grid">
-					<h3 class="mb-4">Sedan Taxi -- <span class="">Rs.30/km*</span></h3>
-					<h4 class="my-3">The title suggests itself</h4>
-					<p> At very affordable rates, reach your destination in  premium cars from brands like Mercedes and Audi.</p>
-					<p style="border-top: 3px solid #bbb;"></p>
-					<!-- <ul class="d-flex mt-3">
-						<li class="mr-3">4 <i class="fas fa-male" aria-hidden="true"></i></li>
-						<li class="mr-3">3 <i class="fas fa-suitcase" aria-hidden="true"></i></li>
-						<li class="mr-3">1 <i class="fas fa-wifi" aria-hidden="true"></i></li>
-					</ul> -->
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- //Our prices -->
-
-	<!--/testimonials-->
-	<section class="testimonials banner-bottom-agile-w3ls py-5">
-		<div class="container py-lg-5 py-3">
-			<h3 class="heading text-capitalize text-center">Reviews</h3>
-			<h5 class="heading mb-5 text-center">Cammy Cab</h5>
-			<div class="inner-sec-w3layouts-agileits">
-				<div class="owl-carousel owl-theme">
-					<div class="item">
-						<div class="feedback-info">
-							<div class="feedback-top p-4">
-								<p> I love using Cammy to get rides to places I need to go they're always fairly priced they're always nice cars and the drivers are always very friendly to me. I Highly recommend your work to anyone looking to use a ride service to get to where they need to go. </p>
-							</div>
-							<div class="feedback-grids">
-								<div class="feedback-img">
-									<img src="images/team1.jpg" class="img-fluid" alt="" />
-								</div>
-								<div class="feedback-img-info">
-									<h5>Saumya Shah</h5>
-									<p>Customer</p>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="feedback-info">
-							<div class="feedback-top p-4">
-								<p> Excellent. Driver is very nice and friendly and make sure that your drive home is a calm and relaxing one. Also very knowledgeable of the roadways. </p>
-							</div>
-							<div class="feedback-grids">
-								<div class="feedback-img">
-									<img src="images/team3.jpg" class="img-fluid" alt="" />
-								</div>
-								<div class="feedback-img-info">
-									<h5>Kishan Trivedi</h5>
-									<p>Customer</p>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="feedback-info">
-							<div class="feedback-top p-4">
-								<p> Had to have a ride at 4am. Booked days ahead. Was able to book, got confirmation with driver's name, got texts, was told how far driver was out from me, car type and license plate. Driver showed early and I was at airport before 4am! USE THIS APP if you want reliably.</p>
-							</div>
-							<div class="feedback-grids">
-								<div class="feedback-img">
-									<img src="images/team1.jpg" class="img-fluid" alt="" />
-								</div>
-								<div class="feedback-img-info">
-									<h5>Nancy Joshi</h5>
-									<p>Customer</p>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="feedback-info">
-							<div class="feedback-top p-4">
-								<p> For me they're always on time. I been using Cammy Cabs since 2018 and no regrets. Safe 100% and very cordial., maybe some people disagree with me but I'm just sharing my experiences. I recommend it with my eyes close. </p>
-							</div>
-							<div class="feedback-grids">
-								<div class="feedback-img">
-									<img src="images/team3.jpg" class="img-fluid" alt="" />
-								</div>
-								<div class="feedback-img-info">
-									<h5>Megha Bhatt</h5>
-									<p>Customer</p>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="feedback-info">
-							<div class="feedback-top p-4">
-								<p> A truly great app. You can get a ride at anytime, and it shows you what vehicle to watch for and gives the license plate number. You can also track your incoming Uber in real-time so you can wait inside until it is about to arrive. I love this app and the service that Cammy provides.</p>
-							</div>
-							<div class="feedback-grids">
-								<div class="feedback-img">
-									<img src="images/team1.jpg" class="img-fluid" alt="" />
-								</div>
-								<div class="feedback-img-info">
-									<h5>Shivam Sheth</h5>
-									<p>Customer</p>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="feedback-info">
-							<div class="feedback-top p-4 p-4">
-								<p> When I went to Mumbai this month for my nephew's wedding, I #Cammied it all over. Fast service and nice drivers. My app told me how many minutes until arrival, the color of the car, the name of the driver and his excellent driving experience.</p>
-							</div>
-							<div class="feedback-grids">
-								<div class="feedback-img">
-									<img src="images/team3.jpg" class="img-fluid" alt="" />
-								</div>
-								<div class="feedback-img-info">
-									<h5>Fenil Mehta</h5>
-									<p>Customer</p>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--//testimonials-->
-	
-	{% endblock %}
+        <!--/testimonials-->
+        <section class="testimonials banner-bottom-agile-w3ls py-5">
+            <div class="container py-lg-5 py-3">
+                <h3 class="heading text-capitalize text-center">Reviews</h3>
+                <h5 class="heading mb-5 text-center">Cammy Cab</h5>
+                <div class="inner-sec-w3layouts-agileits">
+                    <div class="owl-carousel owl-theme">
+                        <div class="item">
+                            <div class="feedback-info">
+                                <div class="feedback-top p-4">
+                                    <p> I love using Cammy to get rides to places I need to go they're always fairly priced they're always nice cars and the drivers are always very friendly to me. I Highly recommend your work to anyone looking to use a ride service to get to where they need to go. </p>
+                                </div>
+                                <div class="feedback-grids">
+                                    <div class="feedback-img">
+                                        <img src="{{ url_for('static', filename='images/team1.jpg') }}" class="img-fluid" alt="" />
+                                    </div>
+                                    <div class="feedback-img-info">
+                                        <h5>Saumya Shah</h5>
+                                        <p>Customer</p>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="feedback-info">
+                                <div class="feedback-top p-4">
+                                    <p> Excellent. Driver is very nice and friendly and make sure that your drive home is a calm and relaxing one. Also very knowledgeable of the roadways. </p>
+                                </div>
+                                <div class="feedback-grids">
+                                    <div class="feedback-img">
+                                        <img src="{{ url_for('static', filename='images/team3.jpg') }}" class="img-fluid" alt="" />
+                                    </div>
+                                    <div class="feedback-img-info">
+                                        <h5>Kishan Trivedi</h5>
+                                        <p>Customer</p>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="feedback-info">
+                                <div class="feedback-top p-4">
+                                    <p> Had to have a ride at 4am. Booked days ahead. Was able to book, got confirmation with driver's name, got texts, was told how far driver was out from me, car type and license plate. Driver showed early and I was at airport before 4am! USE THIS APP if you want reliably.</p>
+                                </div>
+                                <div class="feedback-grids">
+                                    <div class="feedback-img">
+                                        <img src="{{ url_for('static', filename='images/team1.jpg') }}" class="img-fluid" alt="" />
+                                    </div>
+                                    <div class="feedback-img-info">
+                                        <h5>Nancy Joshi</h5>
+                                        <p>Customer</p>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="feedback-info">
+                                <div class="feedback-top p-4">
+                                    <p> For me they're always on time. I been using Cammy Cabs since 2018 and no regrets. Safe 100% and very cordial., maybe some people disagree with me but I'm just sharing my experiences. I recommend it with my eyes close. </p>
+                                </div>
+                                <div class="feedback-grids">
+                                    <div class="feedback-img">
+                                        <img src="{{ url_for('static', filename='images/team3.jpg') }}" class="img-fluid" alt="" />
+                                    </div>
+                                    <div class="feedback-img-info">
+                                        <h5>Megha Bhatt</h5>
+                                        <p>Customer</p>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="feedback-info">
+                                <div class="feedback-top p-4">
+                                    <p> A truly great app. You can get a ride at anytime, and it shows you what vehicle to watch for and gives the license plate number. You can also track your incoming Uber in real-time so you can wait inside until it is about to arrive. I love this app and the service that Cammy provides.</p>
+                                </div>
+                                <div class="feedback-grids">
+                                    <div class="feedback-img">
+                                        <img src="{{ url_for('static', filename='images/team1.jpg') }}" class="img-fluid" alt="" />
+                                    </div>
+                                    <div class="feedback-img-info">
+                                        <h5>Shivam Sheth</h5>
+                                        <p>Customer</p>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="feedback-info">
+                                <div class="feedback-top p-4 p-4">
+                                    <p> When I went to Mumbai this month for my nephew's wedding, I #Cammied it all over. Fast service and nice drivers. My app told me how many minutes until arrival, the color of the car, the name of the driver and his excellent driving experience.</p>
+                                </div>
+                                <div class="feedback-grids">
+                                    <div class="feedback-img">
+                                        <img src="{{ url_for('static', filename='images/team3.jpg') }}" class="img-fluid" alt="" />
+                                    </div>
+                                    <div class="feedback-img-info">
+                                        <h5>Fenil Mehta</h5>
+                                        <p>Customer</p>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--//testimonials-->
+    {% endblock %}

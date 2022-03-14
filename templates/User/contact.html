@@ -1,5 +1,9 @@
 {% extends 'user/master.html' %}
 
+    {% block header %}
+    <div style="height: 90px; background-color: #252525;"></div>
+    {% endblock %}
+    
     {% block content %}
     <!-- Contact -->
     <section class="contact py-5">
@@ -35,7 +39,7 @@
                         <div class="col-lg-4 mb-lg-0 mb-4 address-grid">
                             <div class="row address-info">
                                 <div class="col-lg-3 col-sm-2 mb-sm-0 mb-3 address-left">
-                                    <i class="fas fa-map-marker-alt"></i>
+                                    <i class="fa fa-map-marker"></i>
                                 </div>
                                 <div class="col-lg-9 col-sm-10 address-right text-left">
                                     <h6>Address</h6>
@@ -47,7 +51,7 @@
                         <div class="col-lg-4 mb-lg-0 mb-4 address-grid">
                             <div class="row address-info">
                                 <div class="col-lg-3 col-sm-2 mb-sm-0 mb-3 address-left">
-                                    <i class="fas fa-envelope-open"></i>
+                                    <i class="fa fa-envelope-open"></i>
                                 </div>
                                 <div class="col-lg-9 col-sm-10 address-right text-left">
                                     <h6>Email</h6>
@@ -60,7 +64,7 @@
                         <div class="col-lg-4 address-grid">
                             <div class="row address-info">
                                 <div class="col-lg-3 col-sm-2 mb-sm-0 mb-3 address-left">
-                                    <i class="fas fa-phone"></i>
+                                    <i class="fa fa-phone"></i>
                                 </div>
                                 <div class="col-lg-9 col-sm-10 address-right text-left">
                                     <h6>Phone</h6>
