@@ -1,38 +1,28 @@
-<form id="send_location_info" class="mt-4" action="" method="POST">
-    <div class="form-group">
-    <!-- Assigning value to the input field using the object sent from the view definition -->
-    <input type="text" class="form-control" value="{% if name %} {{name[0]}} {% endif %}" id="origin" placeholder="Origin">
-    </div>
-    <div class="form-group">
-    <!-- Assigning value to the input field using the object sent from the view definition -->
-    <input type="text" class="form-control" value="{% if name %} {{name[1]}} {% endif %}" id="destination" placeholder="Destination">
-    </div>
-    <!-- The type of input field is set to "hidden" because they are used only for sending data to backend using JavaScript-->
-    <input type="hidden" id="origin_coordinates" value="" name="origin_coordinates">
-    <input type="hidden" id="destination_coordinates" value="" name="destination_coordinates">
-    <input type="hidden" id='origin_place_id' value="" name="origin_place_id">
-    <input type="hidden" id="destination_place_id" value="" name="destination_place_id">
-    <input type="hidden" id="origin_name" value="" name="origin_name">
-    <input type="hidden" id="destination_name" value="" name="destination_name">
-</form>
-<br><br>
-<h6 class="display-5">Enter Complete Address</h6>
+<!DOCTYPE html>
+<html>
+  <head>
+    {{"decoupled-map"|googlemap_js(37.4419, -122.1419, markers=[(37.4419,
+    -122.1419)])}} {{mymap.js}} {{sndmap.js}}
+  </head>
+  <body>
+    <h1>Flask Google Maps Example</h1>
 
-<form id="send_address" class="mt-4" action="" method="POST">
-    <div class="form-group">
-        <input type="text" class="form-control" id="floor" placeholder="HOUSE / FLAT / BLOCK NO.">
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" id="floor" placeholder="APARTMENT / COMPLEX NAME">
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" id="floor" placeholder="LANDMARK">
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" id="floor" placeholder="ZIPCODE">
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" id="floor" placeholder="DIRECTIONS TO REACH">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <h2>Template function centered, no marker</h2>
+    {{googlemap("simple-map", 37.4419, -122.1419)}}
+
+    <h2>Template filter decoupled with single marker</h2>
+    {{"decoupled-map"|googlemap_html(37.4419, -122.1419)}}
+
+    <h2>Template function with multiple markers</h2>
+    {% with map=googlemap_obj("another-map", 37.4419, -122.1419,
+    markers=[(37.4419, -122.1419), (37.4300, -122.1400)]) %} {{map.html}}
+    {{map.js}} {% endwith %}
+
+    <h2>First map generated in view</h2>
+    {{mymap.html}}
+
+    <h2>Second map generated in view</h2>
+    <h3>Example for different icons in multiple markers with infoboxes</h3>
+    {{sndmap.html}}
+  </body>
+</html>

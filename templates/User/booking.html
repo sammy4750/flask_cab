@@ -2,92 +2,100 @@
 
     {% block content %}
 
-    <!-- Booking -->
-    <section class="bookingform py-5">
-        <div class="container col-lg-6 py-md-5 py-3">
-            <h1 class="heading text-capitalize text-center">Booking form</h1>
-            <h5 class="heading mb-5 text-center">Taxi Cab</h5>
-            <div class="row justify-content-center" role="document">
-                <div class="book-appointment p-sm-5 py-5 px-4">
-                    <h2>Personal Details</h2>
-                    <div class="book-agileinfo-form">
-                        <form action="#" method="post">
-                            <div class="row main-agile-sectns">
-                                <div class="col-md-6 agileits-btm-spc form-text1">
-                                    <input type="text" name="Name" placeholder="Full Name" required="">
-                                </div>
-                                <div class="col-md-6 agileits-btm-spc form-text2">
-                                    <input type="text" name="Phone no" placeholder="Phone number" required="">
-                                </div>
-                            </div>
-                            <div class="row ">
-                                <div class="col-md-6 agileits-btm-spc form-text1">
-                                    <input type="email" name="email" placeholder="Email" required="">
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="agileits-btm-spc">
-                                        <select id="cab" onchange="change_country(this.value)" class="frm-field required sect">
-                                            <option value="">Select Cab</option>
-                                            <option value="">Mini</option>
-                                            <option value="">Sedan</option>
-                                            <option value="">Elite</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                            <h2 class="sub-head-w3ls">Booking Details</h2>
-                            <div class="row main-agile-sectns">
-                                <div class="col-md-6 agileits-btm-spc form-text1">
-                                    <input id="datepicker" name="Text" type="text" placeholder="Pick-up Date" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}"
-                                        required="">
-                                </div>
-                                <div class="col-md-6 agileits-btm-spc form-text2">
-                                    <input type="text" id="timepicker" name="Time" class="timepicker form-control" placeholder="Pick-up Time" value="">
-                                </div>
-                            </div>
-                            <div class="row main-agile-sectns">
-                                <div class="col-md-6 agileits-btm-spc form-text1">
-                                    <input type="text" name="Pick-up Location" placeholder="Pick-up Location" required="">
-                                </div>
-                                <div class="col-md-6 agileits-btm-spc form-text2">
-                                    <input type="text" name="Drop-off Location" placeholder="Drop-off Location" required="">
-                                </div>
-                            </div>
 
-                            <div class="main-agile-sectns">
-                                <div class="agileits-btm-spc">
-                                    <select id="passengers" onchange="change_country(this.value)" class="frm-field required sect">
-                                        <option value="">No.of Passengers</option>
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>         
-                                        <option value="">4</option>
-                                        <option value="">5</option>
-                                    </select>
-                                </div>
-                                <div class="agileits-btm-spc form-text2">
-                                    <select id="direction" onchange="change_country(this.value)" class="frm-field required">
-                                        <option value="">Direction</option>
-                                        <option value="">One Way</option>
-                                        <option value="">Return</option>       
-                                    </select>
+
+    <!-- Booking -->
+    <section class="bookingride">
+        <div class="row">
+            <div class="col-lg-3" style=" height: 810px;">
+                <div class="" style="width: 100%; height: 50%;">
+                    <div class="">
+                        <div id="accordion">
+                            <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <i class="fa fa-home" aria-hidden="true"></i>&nbsp &nbsp
+                                    Choose from a Saved Trip
+                                </button>
+                                </h5>
+                            </div>
+                        
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body text-dark">
+                                    <a href="">1. Home</a> 
                                 </div>
                             </div>
-                            <input type="submit" value="Book Now">
-                            <input type="reset" value="Reset">
-                        </form>
+                            </div>
+                            <div class="card">
+                                <div class="card-header id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i> &nbsp &nbsp
+                                    Enter new location
+                                    </button>
+                                </h5>
+                                </div>
+                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body text-dark">
+                                    <h5 class="card-title">Enter Origin and Destination</h5>
+                                    <form id="send_location_info" class="mt-4" action="" method="POST">
+                                        <div class="form-group">
+                                        <input type="text" class="form-control" id="origin" placeholder="Origin">
+                                        </div>
+                                        <div class="form-group">
+                                        <input type="text" class="form-control" id="destination" placeholder="Destination">
+                                        </div>
+                                        
+                                        <input type="hidden" id="origin_lat" value="" name="origin_lat">
+                                        <input type="hidden" id="destination_lat" value="" name="destination_lat">
+                                        <input type="hidden" id='origin_lng' value="" name="origin_lng">
+                                        <input type="hidden" id="destination_lng" value="" name="destination_lng">
+                                    </form>
+                                    <div class="form-group">
+                                        <button onclick="getDirections()" type="text" class=" form-control btn btn-warning text-white btn-sm"><b>Confirm</b></button>
+                                    </div>
+                                    <br><br>
+                                    <h6 class="display-5">Enter Complete Address</h6>
+                                    
+                                    <form id="send_address" class="mt-4" action="" method="POST">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="floor" placeholder="HOUSE / FLAT / BLOCK NO.">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="floor" placeholder="APARTMENT / COMPLEX NAME">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="floor" placeholder="LANDMARK">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="floor" placeholder="ZIPCODE">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="floor" placeholder="DIRECTIONS TO REACH">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    <br><br>
                     </div>
                 </div>
-                <div class="col-lg-6 mt-md-5">
-                    <img src="images/car1.png" alt="" class="img-fluid" />
-                    <img src="images/car2.png" alt="" class="img-fluid" />
-                </div>
             </div>
-        </div>
-    </section>	
-    <!-- //Booking -->
+            <div class="col-lg-9">
+				<br>
+			    <div class="row">
+                    <!-- <h6 style="padding-left: 20px;">Distance and Duration</h6> -->
+				  <div class="col-lg-12" style="padding-right: 40px;"> 
+                    <div id="map" style="height: 700px;">
 
+                    </div> 
+				  </div>
+			    </div>
+			</div>
+        </div>
+    </section>
+    
     {% endblock %}
-	
-	
